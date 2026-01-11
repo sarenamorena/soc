@@ -29,7 +29,7 @@ body {
 
 /* --- TITLE STYLES --- */
 .title-container {
-    text-align: center;
+    text-align: left;
     z-index: 10; /* Ensures title sits above papers if they overlap */
     pointer-events: none; /* Allows clicking through text area if needed */
     margin-bottom: 2rem;
@@ -42,6 +42,10 @@ h1 {
     letter-spacing: 2px;
     color: var(--text-charcoal);
     font-weight: 100;
+    position: absolute;
+    bottom: 20px;
+    right: 550px;
+    
     
 }
 
@@ -66,6 +70,9 @@ h2 {
     font-size: 1rem;
     opacity: 0.6;
     margin-top: 0.5rem;
+    position: relative;
+    bottom: 20px;
+    right: 630px;
 }
 
 /* --- PAPER ELEMENTS (Shared Styles) --- */
@@ -223,138 +230,64 @@ footer {
     z-index: 100;
 }
 
-/* =========================================
-   DECORATION ITEMS
-   ========================================= */
-
-.decoration-item {
-    position: absolute;
-    pointer-events: none; /* Allows clicking through the image */
-    z-index: 1; /* Low z-index so they sit BEHIND the interactive papers (which are usually z-index 10+) */
-    opacity: 0.8; /* Slight transparency helps them blend in */
-    filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1));
-}
-
-/* DESKTOP POSITIONS (Scatter them around) */
-@media (min-width: 1024px) {
-    .deco-1 {
-        top: 29%;
-        left: 15%;
-        transform: rotate(240deg);
-        width: 80px;
-    }
-
-    .deco-2 {
-        bottom: 13%;
-        left: 23%;
-        transform: rotate(-180deg);
-        width: 70px;
-    }
-
-    .deco-3 {
-        top: 20%;
-        right: 23%;
-        transform: rotate(15deg);
-        width: 80px;
-    }
-
-    .deco-4 {
-        top: 68%;
-        right: 17%;
-        transform: rotate(60deg);
-        width: 80px;
-    }
-}
-
-/* MOBILE POSITIONS (Hide or simplify) */
-@media (max-width: 1023px) {
-    /* Often best to hide decorations on mobile to save space */
-    .decoration-item {
-        display: none; 
-    }
-    
-    /* OR if you want them, position them absolutely relative to the document flow */
-    /* .decoration-item { position: fixed; ... } */
-}
-
-/* =========================================
-   FEEDBACK WIDGET STYLES
-   ========================================= */
-
-.feedback-box {
+/* --- Overlay (The dark background) --- */
+.overlay {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background: #f3eee8;
-    padding: 20px;
-    z-index: 1000;
-    /* Hard retro shadow */
-    text-align: center;
-    max-width: 300px;
-    
-    /* Animation for appearing */
-    animation: slideUp 0.5s ease-out;
-    transition: opacity 0.5s ease;
-}
-
-.feedback-text {
-    font-family: 'Arial', sans-serif; /* Or your retro font */
-    font-weight: 100;
-    font-size: 1.1rem;
-    color: #000;
-    margin-bottom: 15px;
-    text-transform: lowercase;
-    letter-spacing: 1px;
-}
-
-.feedback-buttons {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Semi-transparent dark dim */
+    backdrop-filter: blur(3px); /* Optional: blurs the background slightly */
     display: flex;
-    gap: 15px;
     justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensures it sits on top of everything */
 }
 
-.retro-btn {
-    background-color: #000000;
-    color: #f3eee8;
-    border: 2px solid #000000;
-    padding: 8px 20px;
-    font-family: inherit;
+
+/* --- Bottom Left Retro Back Button --- */
+.back-btn-retro {
+    /* Positioning */
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    z-index: 50;
+
+    /* Retro Block Styling */
+    display: inline-block;
+    background-color: #000; /* Vintage Cream/Yellow */
+    color: #fff; /* Dark Brown Text */
+    text-decoration: none;
+    
+    /* Typewriter Font */
+    font-family: 'Arial', sans-serif; 
+    font-size: 1.2rem;
     font-weight: 100;
-    font-size: 0.9rem;
+    text-transform: lowercase; /* All caps for retro feel */
+    letter-spacing: 1px;
+    
+    padding: 10px 20px;
+    
+    /* The "Hard" Retro Border & Shadow */
+    border: 2px solid #0000;
+   
+    
+    /* Initial Tilt */
+
+    transition: all 0.1s ease; /* Fast transition for mechanical feel */
+}
+
+/* Hover Effect: Wiggles slightly */
+.back-btn-retro:hover {
+    transform: rotate(0deg) translate(-1px, -1px);
+    background-color: #000;
     cursor: pointer;
-    text-transform: lowercase;
-    transition: all 0.2s;
 }
 
-/* Hover Effect: Invert Colors */
-.retro-btn:hover {
-    background-color: #f3eee8;
-    color: #000000;
-    /* Hard shadow shift */
-    box-shadow: 3px 3px 0px rgba(0,0,0,0.5);
-    transform: translate(-2px, -2px);
+/* Active (Click) Effect: Simulates pressing a physical button */
+.back-btn-retro:active {
+    color: #fff;
+    box-shadow: 0px 0px 0px #0000; /* Shadow disappears */
+    transform: translate(4px, 4px) rotate(0deg); /* Moves down to where shadow was */
 }
-
-.retro-btn:active {
-    transform: translate(0, 0);
-    box-shadow: none;
-}
-
-@keyframes slideUp {
-    from { transform: translateY(50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-/* Mobile Tweak: Center it on phone */
-@media (max-width: 600px) {
-    .feedback-box {
-        right: 50%;
-        transform: translateX(50%); /* Start centered */
-        bottom: 20px;
-        width: 90%;
-        /* We need to override the animation transform for centering to work */
-        animation: none; 
-    }
-}
-
-

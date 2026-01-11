@@ -12,6 +12,28 @@
 <body>
 
     <main class="desk-container">
+
+          <main class="desk-container">
+        <img src="/images/modreciary.png" 
+             class="decoration-item deco-1" 
+             alt="" 
+             aria-hidden="true">
+
+        <img src="/images/cerveneciary.png" 
+             class="decoration-item deco-2" 
+             alt="" 
+             aria-hidden="true">
+
+        <img src="/images/zeleneciary.png" 
+             class="decoration-item deco-3" 
+             alt="" 
+             aria-hidden="true">
+
+        <img src="/images/zlteciary.png" 
+             class="decoration-item deco-4" 
+             alt="" 
+             aria-hidden="true">
+
         <div class="top"><h2>nevyhorím</h2></div>
 
 
@@ -22,28 +44,30 @@
 
         <a href="#about" class="paper-link pos-1">
             <div class="paper-content">
-                <img src="/images/papier1.png" alt="About Paper">
+                <img src="/images/papier1.png" alt="čo je vyhorenie">
             </div>
         </a>
 
         <a href="/sara.html" class="paper-link pos-2">
             <div class="paper-content">
-                <img src="/images/gulicka.png" alt="Projects Paper">
+                <img src="/images/gulicka.png" alt="o mne">
             </div>
         </a>
 
 
         <a href="#blog" class="paper-link pos-4">
             <div class="paper-content">
-                <img src="/images/papier3.png" alt="Blog Paper">
+                <img src="/images/papier3.png" alt="test">
             </div>
         </a>
 
         <a href="#social" class="paper-link pos-5">
             <div class="paper-content">
-                <img src="/images/papier4.png" alt="Social Paper">
+                <img src="/images/papier4.png" alt="ako riešiť vyhorenie">
             </div>
         </a>
+             
+    </main>
 
 
     </main>
@@ -51,6 +75,48 @@
     <footer>
         &copy; 2023 Creative Studio. All Rights Reserved.
     </footer>
+
+</body>
+</html>
+
+<div id="feedback-widget" class="feedback-box">
+        <p class="feedback-text">Pomohla ti táto stránka?</p>
+        <div class="feedback-buttons">
+            <button class="retro-btn" onclick="submitVote('yes')">ÁNO</button>
+            <button class="retro-btn" onclick="submitVote('no')">NIE</button>
+        </div>
+    </div>
+
+    <script>
+        function submitVote(answer) {
+            const widget = document.getElementById('feedback-widget');
+            
+            // 1. Visual Feedback (User sees they clicked)
+            widget.innerHTML = '<p class="feedback-text">Ďakujeme za tvoj názor!</p>';
+            
+            // 2. Logic (Here is where you would save to a database)
+            console.log("User voted: " + answer);
+            
+            // Example: Saving to LocalStorage (Browser memory) so they don't vote twice immediately
+            localStorage.setItem('hasVoted', 'true');
+            localStorage.setItem('voteValue', answer);
+
+            // 3. Hide the box after 2 seconds
+            setTimeout(() => {
+                widget.style.opacity = '0';
+                // Remove from DOM after fade out to prevent clicks
+                setTimeout(() => widget.style.display = 'none', 500);
+            }, 2000);
+        }
+
+        // Optional: Check if user already voted when page loads
+        document.addEventListener("DOMContentLoaded", function() {
+            if(localStorage.getItem('hasVoted') === 'true') {
+                // If you want to hide it for returning users, uncomment the line below:
+                // document.getElementById('feedback-widget').style.display = 'none';
+            }
+        });
+    </script>
 
 </body>
 </html>
