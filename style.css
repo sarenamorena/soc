@@ -1,0 +1,224 @@
+/* --- RESET & VARIABLES --- */
+:root {
+    --bg-color: #f3eee8;
+    --text-charcoal: #000000;
+
+    /* FIXED: Switched variables to use drop-shadow filter syntax instead of box-shadow values */
+    /* A slightly darker, tighter shadow looks better for cut paper */
+    --paper-drop-shadow: drop-shadow(0 8px 12px rgba(0,0,0,0.25));
+    --paper-hover-drop-shadow: drop-shadow(0 15px 20px rgba(0,0,0,0.35));
+
+    --font-title: 'CS Quiver Demo', sans-serif;
+    --font-body: 'Arial', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    font-family: var(--font-body);
+    color: var(--text-charcoal);
+    min-height: 100vh;
+    overflow-x: hidden; /* Prevent horizontal scroll from rotated elements */
+    position: relative;
+}
+
+/* --- TITLE STYLES --- */
+.title-container {
+    text-align: center;
+    z-index: 10; /* Ensures title sits above papers if they overlap */
+    pointer-events: none; /* Allows clicking through text area if needed */
+    margin-bottom: 2rem;
+    padding-top: 2rem;
+}
+
+h1 {
+    font-family: var(--font-title);
+    font-size: 50px;
+    letter-spacing: 2px;
+    color: var(--text-charcoal);
+    font-weight: 100;
+    
+}
+
+h2 {
+    font-family: var(--font-title);
+    font-size: 25px;
+    letter-spacing: 1px;
+    color: #4A69B3;
+    
+}
+.top{
+    position:absolute;
+    left:50%;
+    top: 1rem;
+    transform: translateX(-50%);
+
+}
+
+
+
+.title-container p {
+    font-size: 1rem;
+    opacity: 0.6;
+    margin-top: 0.5rem;
+}
+
+/* --- PAPER ELEMENTS (Shared Styles) --- */
+.paper-link {
+    display: block;
+    text-decoration: none;
+    /* Transition on the container for movement/rotation */
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    width: fit-content;
+    margin: 0 auto;
+    /* Ensure the shadow doesn't get clipped by the link container */
+    overflow: visible;
+}
+
+.paper-content {
+    /* FIXED: Removed background: white and padding */
+    /* The container is now transparent, just holding the image */
+    display: block;
+    position: relative;
+
+    /* FIXED: Switched from box-shadow to filter: drop-shadow */
+    /* This makes the shadow follow the shape of the PNG image */
+    filter: var(--paper-drop-shadow);
+
+    /* Transition for the shadow change on hover */
+    transition: filter 0.3s ease;
+    /* Important: ensures the drop-shadow isn't clipped */
+    overflow: visible;
+}
+
+.paper-content img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    /* Ensure the image itself doesn't have unintended borders */
+    border: none;
+    outline: none;
+}
+
+/* Hover Effects */
+.paper-link:hover {
+    z-index: 20; /* Bring hovered item to very top */
+    transform: scale(1.05) rotate(0deg) !important; /* Straighten and zoom container */
+}
+
+.paper-link:hover .paper-content {
+    /* FIXED: Apply the stronger drop-shadow filter on hover */
+    filter: var(--paper-hover-drop-shadow);
+}
+
+/* --- MOBILE LAYOUT (Default) --- */
+/* On mobile, we stack them neatly so they are usable */
+.desk-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding-bottom: 80px; /* Space for footer */
+}
+
+/* Random rotations for mobile organic feel */
+.pos-1 { transform: rotate(-2deg); }
+.pos-2 { transform: rotate(3deg); }
+.pos-3 { transform: rotate(-1deg); }
+.pos-4 { transform: rotate(2deg); }
+.pos-5 { transform: rotate(-3deg); }
+
+/* --- DESKTOP LAYOUT (Min-width: 1024px) --- */
+/* Here we switch to the "Creative Scattered" Absolute layout */
+@media (min-width: 1024px) {
+    body, html {
+        height: 100%;
+        overflow: hidden; /* Lock scroll for full-screen feel */
+    }
+
+    .desk-container {
+        display: block; /* Disable flex */
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    .title-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        font-size: 10rem; /* Larger title on desktop */
+    }
+
+    .paper-link {
+        position: absolute;
+        max-width: 180px; /* Increased slightly for desktop view */
+    }
+
+    /* SCATTER COORDINATES */
+
+    /* Top Left */
+    .pos-1 {
+        top: 30%;
+        left: 20%;
+        transform: rotate(-10deg);
+         max-width: 250px;
+    }
+
+    /* Top Right */
+    .pos-2 {
+        top: 25%;
+        right: 25%;
+        transform: rotate(10deg);
+        max-width: 150px;
+    }
+
+   
+
+    /* Bottom Right */
+    .pos-4 {
+        bottom: 20%;
+        left: 62%;
+        transform: rotate(-8deg);
+        max-width: 250px;
+    }
+
+    /* Middle Top/Rightish */
+    .pos-5 {
+        top: 65%;
+        left: 25%; /* Overlapping vibe */
+        transform: rotate(-20deg);
+        max-width: 200px;
+    }
+
+    .pos-6 {
+        top: 20%;
+        right: 50%;
+        max-width: 150px;
+    }
+
+}
+
+/* --- FOOTER --- */
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #888;
+    background-color: transparent; /* Slight transparency */
+    z-index: 100;
+}
