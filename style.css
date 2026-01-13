@@ -1,5 +1,4 @@
 /* --- RESET & VARIABLES --- */
-
 :root {
     --bg-color: #f3eee8;
     --text-charcoal: #000000;
@@ -9,8 +8,19 @@
     --paper-drop-shadow: drop-shadow(0 8px 12px rgba(0,0,0,0.25));
     --paper-hover-drop-shadow: drop-shadow(0 15px 20px rgba(0,0,0,0.35));
 
-    --font-title: 'CS Quiver Demo', sans-serif;
-    --font-body: 'Arial', sans-serif;
+
+}
+font-face {
+    font-family: 'CS Quiver Demo';
+    src: url('/fonts/CsQuiverRegularDemo-ov0o0.otf') format('truetype');
+    /* Note: If your CSS file is inside a folder (like css/style.css), 
+       use url('../fonts/PatrickHand-Regular.ttf') instead. */
+}
+
+/* 2. Define Permanent Marker */
+font-face {
+    font-family: 'Arial';
+    src: url('/fonts/ARIAL.TTF') format('truetype');
 }
 
 * {
@@ -21,7 +31,7 @@
 
 body {
     background-color: var(--bg-color);
-    font-family: var(--font-body);
+    font-family: 'Arial';
     color: var(--text-charcoal);
     min-height: 100vh;
     overflow-x: hidden; /* Prevent horizontal scroll from rotated elements */
@@ -38,7 +48,7 @@ body {
 }
 
 h1 {
-    font-family: var(--font-title);
+    font-family: 'CS Quiver Demo';
     font-size: 50px;
     letter-spacing: 2px;
     color: var(--text-charcoal);
@@ -47,7 +57,7 @@ h1 {
 }
 
 h2 {
-    font-family: var(--font-title);
+    font-family: 'CS Quiver Demo';
     font-size: 25px;
     letter-spacing: 1px;
     color: #4A69B3;
