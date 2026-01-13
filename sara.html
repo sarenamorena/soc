@@ -7,6 +7,23 @@
     <link rel="stylesheet" href="sara-style.css">
   
 </head>
+<script>
+    function openPopup(blockId) {
+        // 1. Hide all content blocks first
+        document.querySelectorAll('.content-item').forEach(el => el.classList.add('hidden'));
+
+        // 2. Show the specific block requested
+        document.getElementById(blockId).classList.remove('hidden');
+
+        // 3. Show the main overlay
+        document.getElementById('popup-overlay').classList.remove('hidden');
+    }
+
+    function closePopup() {
+        document.getElementById('popup-overlay').classList.add('hidden');
+    }
+</script>
+
 <body>
 
     <main class="desk-container">
@@ -20,36 +37,92 @@
             <p>klikni na obrázky a zisti viac</p>
         </div>
 
-        <a href="#about" class="paper-link pos-1">
-            <div class="paper-content">
-                <img src="/images/modrye.png" alt="ja">
-            </div>
-        </a>
 
-        <a href="/sara.html" class="paper-link pos-2">
-            <div class="paper-content">
-                <img src="/images/oko.png" alt="prečo som sa rozhodla riešiť túto tému">
+            <div class="paper-content"  onclick="openPopup('fotka')"> 
+                <img src="images/modrye.png" alt="ja">
             </div>
-        </a>
+        
+
+       
+            <div class="paper-content" onclick="openPopup('preco-ma-vyhorenie-zaujima?')">
+                <img src="images/oko.png" alt="prečo som sa rozhodla riešiť túto tému">
+            </div>
+      
 
 
-        <a href="#blog" class="paper-link pos-4">
-            <div class="paper-content">
-                <img src="/images/cervenye.png" alt="soč">
+      
+            <div class="paper-content"  onclick="openPopup('moja-soc')">
+                <img src="images/cervenye.png" alt="soč">
             </div>
-        </a>
+      
 
-        <a href="#social" class="paper-link pos-5">
-            <div class="paper-content">
-                <img src="/images/zltye.png" alt="kontakt">
+
+
+            <div class="paper-content" onclick="openPopup('kontakt-na-mna')">
+                <img src="images/zltye.png" alt="kontakt">
             </div>
-        </a>
+     
              
     </main>
 
         <a href="index.html" class="back-btn-retro">
     ← Back
         </a>
+
+
+<div id="popup-overlay" class="hidden" onclick="closePopup()">
+    
+    <div class="popup-content" onclick="event.stopPropagation()">
+        <button class="close-popup-btn" onclick="closePopup()">✕</button>
+
+        <div id="preco-ma-vyhorenie-zaujima?" class="content-item hidden">
+            <h2>Prečo ma vyhorenie zaujíma?</h2>
+            <p>This is a text block. Because we set 'overflow-y: auto' in CSS, you can write as much as you want here.</p>
+            <br>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <br>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <br>
+            <p>Keep scrolling... there is more text down here!</p>
+            <br>
+            <p>Final paragraph of the story.</p>
+        </div>
+
+        <div id="moja-soc" class="content-item hidden">
+            <h2>moja soč</h2>
+            <p>This is a text block. Because we set 'overflow-y: auto' in CSS, you can write as much as you want here.</p>
+            <br>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <br>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <br>
+            <p>Keep scrolling... there is more text down here!</p>
+            <br>
+            <p>Final paragraph of the story.</p>
+        </div>
+
+        <div id="kontakt-na-mna" class="content-item hidden">
+            <h2>kontakt na mňa</h2>
+            <p>This is a text block. Because we set 'overflow-y: auto' in CSS, you can write as much as you want here.</p>
+            <br>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <br>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <br>
+            <p>Keep scrolling... there is more text down here!</p>
+            <br>
+            <p>Final paragraph of the story.</p>
+        </div>
+
+        <div id="fotka" class="content-item hidden">
+            <h2>ja :)</h2>
+            <img src="images/20260101_131013.jpg" alt="Me" class="popup-img">
+            <p>Here is a description of the photo.</p>
+        </div>
+
+    </div>
+</div>
+
 </body>
 </html>
 

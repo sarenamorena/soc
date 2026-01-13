@@ -10,17 +10,17 @@
 
 
 }
-font-face {
+@font-face {
     font-family: 'CS Quiver Demo';
-    src: url('/fonts/CsQuiverRegularDemo-ov0o0.otf') format('truetype');
+    src: url('fonts/CsQuiverRegularDemo-ov0o0.otf') format('opentype');
     /* Note: If your CSS file is inside a folder (like css/style.css), 
        use url('../fonts/PatrickHand-Regular.ttf') instead. */
 }
 
 /* 2. Define Permanent Marker */
-font-face {
+@font-face {
     font-family: 'Arial';
-    src: url('/fonts/ARIAL.TTF') format('truetype');
+    src: url('fonts/ARIAL.TTF') format('truetype');
 }
 
 * {
