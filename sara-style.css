@@ -12,6 +12,7 @@
 @font-face {
     font-family: 'CS Quiver Demo';
     src: url('fonts/CsQuiverRegularDemo-ov0o0.otf') format('opentype');
+    font-style: sans-serif;
     /* Note: If your CSS file is inside a folder (like css/style.css), 
        use url('../fonts/PatrickHand-Regular.ttf') instead. */
 }
@@ -20,6 +21,7 @@
 @font-face {
     font-family: 'Arial';
     src: url('fonts/ARIAL.TTF') format('truetype');
+    font-style: sans-serif;
 }
 * {
     margin: 0;
@@ -85,12 +87,13 @@ h2 {
 }
 
 /* --- PAPER ELEMENTS (Shared Styles) --- */
+
 .paper-link {
     display: block;
     text-decoration: none;
     /* Transition on the container for movement/rotation */
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    width: fit-content;
+    width: 150px;
     margin: 0 auto;
     /* Ensure the shadow doesn't get clipped by the link container */
     overflow: visible;
@@ -100,7 +103,7 @@ h2 {
     /* FIXED: Removed background: white and padding */
     /* The container is now transparent, just holding the image */
     display: block;
-    position: relative;
+    position: absolute;
 
     /* FIXED: Switched from box-shadow to filter: drop-shadow */
     /* This makes the shadow follow the shape of the PNG image */
@@ -114,7 +117,7 @@ h2 {
 
 .paper-content img {
     display: block;
-    max-width: 100%;
+    max-width: 20%;
     height: auto;
     /* Ensure the image itself doesn't have unintended borders */
     border: none;
@@ -159,7 +162,7 @@ h2 {
 
     .desk-container {
         display: block; /* Disable flex */
-        position: relative;
+        position: absolute;
         width: 100%;
         height: 100%;
     }
@@ -187,7 +190,7 @@ h2 {
     /* Top Left */
     .pos-1 {
         top: 30%;
-        left: 20%;
+        left: 40%;
         transform: rotate(-10deg);
          max-width: 250px;
     }
@@ -212,19 +215,21 @@ h2 {
 
     /* Middle Top/Rightish */
     .pos-5 {
-        top: 65%;
-        left: 25%; /* Overlapping vibe */
+        top: 55%;
+        left: 40%; /* Overlapping vibe */
         transform: rotate(-20deg);
         max-width: 200px;
     }
 
     .pos-6 {
-        top: 20%;
-        right: 50%;
+        top: 60%;
+        right: 80%;
         max-width: 150px;
     }
 
 }
+
+
 
 /* --- FOOTER --- */
 footer {
@@ -303,7 +308,7 @@ footer {
 
 /* --- 2. THE POPUP OVERLAY (Background) --- */
 #popup-overlay {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -358,3 +363,60 @@ footer {
 .popup-content::-webkit-scrollbar { width: 10px; }
 .popup-content::-webkit-scrollbar-track { background: #eee; border-left: 1px solid #000; }
 .popup-content::-webkit-scrollbar-thumb { background: #000; }
+
+/* --- LAYOUT REPAIR KIT --- */
+
+/* 1. Ensure the page body allows positioning relative to it */
+body {
+    position: relative; 
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* 2. Force the buttons to float and hold their size */
+div.paper-link.paper-content {
+    position: absolute !important; /* Must be absolute to move around */
+    display: block !important;
+    width: 140px !important;       /* Adjust this number to change size */
+    height: auto !important;
+    margin: 0 !important;          /* Remove auto margins */
+    z-index: 50;                   /* Sit on top of the text */
+}
+
+/* 3. FORCE THE POSITIONS (The Scatter) */
+
+/* Position 1: Top Left */
+.pos-1 {
+    top: 20% !important;
+    left: 80% !important;
+    bottom: auto !important;
+    right: auto !important;
+    transform: rotate(-5deg);
+}
+
+/* Position 2: Top Right */
+.pos-2 {
+    top: 70% !important;
+    right: 24% !important;
+    bottom: auto !important;
+    left: auto !important;
+    transform: rotate(5deg);
+}
+
+/* Position 4: Bottom Left (Assuming 4 is bottom left) */
+.pos-4 {
+    bottom: 50% !important;
+    left: 60% !important;
+    top: auto !important;
+    right: auto !important;
+    transform: rotate(3deg);
+}
+
+/* Position 5: Bottom Right */
+.pos-5 {
+    bottom: 35% !important;
+    right: 80% !important;
+    top: auto !important;
+    left: auto !important;
+    transform: rotate(-4deg);
+}
