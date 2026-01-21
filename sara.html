@@ -7,23 +7,6 @@
     <link rel="stylesheet" href="sara-style.css">
   
 </head>
-<script>
-    function openPopup(blockId) {
-        // 1. Hide all content blocks first
-        document.querySelectorAll('.content-item').forEach(el => el.classList.add('hidden'));
-
-        // 2. Show the specific block requested
-        document.getElementById(blockId).classList.remove('hidden');
-
-        // 3. Show the main overlay
-        document.getElementById('popup-overlay').classList.remove('hidden');
-    }
-
-    function closePopup() {
-        document.getElementById('popup-overlay').classList.add('hidden');
-    }
-</script>
-
 <body>
 
     <main class="desk-container">
