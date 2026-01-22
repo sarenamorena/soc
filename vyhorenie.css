@@ -1,0 +1,115 @@
+:root {
+    --bg-color: #f3eee8;
+    --text-charcoal: #000000;
+
+    /* FIXED: Switched variables to use drop-shadow filter syntax instead of box-shadow values */
+    /* A slightly darker, tighter shadow looks better for cut paper */
+    --paper-drop-shadow: drop-shadow(0 8px 12px rgba(0,0,0,0.25));
+    --paper-hover-drop-shadow: drop-shadow(0 15px 20px rgba(0,0,0,0.35));
+
+
+}
+@font-face {
+    font-family: 'CS Quiver Demo';
+    src: url('fonts/CsQuiverRegularDemo-ov0o0.otf') format('opentype');
+    /* Note: If your CSS file is inside a folder (like css/style.css), 
+       use url('../fonts/PatrickHand-Regular.ttf') instead. */
+}
+
+/* 2. Define Permanent Marker */
+@font-face {
+    font-family: 'Arial';
+    src: url('fonts/ARIAL.TTF') format('truetype');
+}
+
+ *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    font-family: 'Arial';
+    color: var(--text-charcoal);
+    min-height: 100vh;
+    overflow-x: hidden; /* Prevent horizontal scroll from rotated elements */
+    position: relative;
+}
+
+/* --- TITLE STYLES --- */
+.title-container {
+    text-align: center;
+    z-index: 10; /* Ensures title sits above papers if they overlap */
+    pointer-events: none; /* Allows clicking through text area if needed */
+    margin-bottom: 2rem;
+    padding-top: 2rem;
+}
+
+h1 {
+    font-family: 'CS Quiver Demo', sans-serif;
+    font-size: 50px;
+    letter-spacing: 2px;
+    color: var(--text-charcoal);
+    font-weight: 100;
+    
+}
+
+h2 {
+    font-family: 'CS Quiver Demo', sans-serif;
+    font-size: 25px;
+    letter-spacing: 1px;
+    color: #1b35b8;
+    
+}
+.top{
+    position:absolute;
+    left:50%;
+    top: 1rem;
+    transform: translateX(-50%);
+
+}
+
+
+
+.title-container p {
+    font-size: 1rem;
+    opacity: 0.6;
+    margin-top: 0.5rem;
+}
+
+
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #888;
+    background-color: transparent; /* Slight transparency */
+    z-index: 100;
+}
+
+.desk-container {
+    /* 1. Limit the width */
+    max-width: 800px;  /* Standard readable width */
+    width: 90%;        /* Fits nicely on smaller screens too */
+    
+    /* 2. Center the block itself */
+    margin: 0 auto;    /* "0" top/bottom, "auto" left/right centers it */
+    
+    /* 3. Center the text inside */
+    text-align: center; 
+    
+    /* Optional: Add some breathing room */
+    padding: 40px 20px;
+}
+
+/* Optional: Make the text nicer to read */
+.desk-container p {
+    line-height: 1.6;  /* Adds space between lines */
+    margin-bottom: 30px;
+    color: #333;
+}
