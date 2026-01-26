@@ -2,11 +2,6 @@
     --bg-color: #f3eee8;
     --text-charcoal: #000000;
 
-    /* FIXED: Switched variables to use drop-shadow filter syntax instead of box-shadow values */
-    /* A slightly darker, tighter shadow looks better for cut paper */
-    --paper-drop-shadow: drop-shadow(0 8px 12px rgba(0,0,0,0.25));
-    --paper-hover-drop-shadow: drop-shadow(0 15px 20px rgba(0,0,0,0.35));
-
 
 }
 @font-face {
@@ -20,6 +15,11 @@
 @font-face {
     font-family: 'Arial';
     src: url('fonts/ARIAL.TTF') format('truetype');
+}
+
+@font-face {
+    font-family: "Agnes";
+    src: url("fonts/Agnes-Regular.otf") format("opentype");
 }
 
  *{
@@ -37,7 +37,7 @@ body {
     position: relative;
 }
 
-/* --- TITLE STYLES --- */
+/* TEXT */
 .title-container {
     text-align: center;
     z-index: 10; /* Ensures title sits above papers if they overlap */
@@ -46,22 +46,182 @@ body {
     padding-top: 2rem;
 }
 
+/* číslo 1*/
+h5 {
+     font-family: 'Agnes', sans-serif;
+    font-size: 25rem;
+    letter-spacing: 0.063rem;
+    color: #de7d8f;
+    position: absolute;
+    left: 5.625rem;
+    font-weight: lighter;
+}
+/* čo je vyhorenie?*/
 h1 {
     font-family: 'CS Quiver Demo', sans-serif;
-    font-size: 50px;
-    letter-spacing: 2px;
-    color: var(--text-charcoal);
+    font-size: 5.625rem;
+    letter-spacing: 0.125rem;
+    color: #de7d8f;
     font-weight: 100;
+    position: absolute;
+    left: 18.75rem;
+    
+}
+/* text1*/
+p1 {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.938rem;
+    letter-spacing: 0.063rem;
+    color: #000000;
+    font-weight: lighter;
+    margin-top: 1.25rem;
+    margin-right: 16.313rem;
+    text-align: justify;
+    position: absolute;
+    top: 11.25rem;
+    left: 19.375rem;
     
 }
 
-h2 {
-    font-family: 'CS Quiver Demo', sans-serif;
-    font-size: 25px;
-    letter-spacing: 1px;
+/* číslo 2*/
+h6 {    
+     font-family: 'Agnes', sans-serif;
+    font-size: 25rem;
+    letter-spacing: 0.063rem;
     color: #1b35b8;
+    position: absolute;
+    left: 2.5rem;
+    top: 43.75rem;
+    font-weight: lighter;
+}
+
+/* ako vzniká?*/
+h4 {
+    font-family: 'CS Quiver Demo', sans-serif;
+    font-size: 5.625rem;
+    letter-spacing: 0.125rem;
+    color: #1b35b8;
+    font-weight: 100;
+    position: absolute;
+    left: 18.75rem;
+    top: 45.625rem;
     
 }
+
+/* text2*/
+p2 {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.938rem;
+    letter-spacing: 0.063rem;
+    color: #000000;
+    font-weight: lighter;
+    margin-top: 1.25rem;
+    margin-right: 16.313rem;
+    text-align: justify;
+    position: absolute;
+    top: 52.5rem;
+    left: 19.375rem;
+    
+}
+
+/* číslo 3*/
+h7 {    
+     font-family: 'Agnes', sans-serif;
+    font-size: 25rem;
+    letter-spacing: 0.063rem;
+    color: #f1d135;
+    position: absolute;
+    left: 5.625rem;
+    top: 75rem;
+}
+
+/* ako mu predísť?*/
+h3 {
+    font-family: 'CS Quiver Demo', sans-serif;
+    font-size: 3.125rem;
+    letter-spacing: 0.125rem;
+    color: #f1d135;
+    font-weight: 100;
+    position: absolute;
+    left: 18.75rem;        
+    top: 87.5rem;
+}
+
+/* text3*/
+p3 {    
+    font-family: 'Arial', sans-serif;
+    font-size: 0.938rem;
+    letter-spacing: 0.063rem;
+    color: #000000;
+    font-weight: lighter;
+    margin-top: 1.25rem;
+    margin-right: 16.313rem;
+    text-align: justify;
+    position: absolute;
+    top: 90.625rem;
+    left: 19.375rem;
+    
+}
+
+/* OBRÁZKY */
+/* hviezda hore */
+.bg-hviezda-1 img {
+    position: absolute;
+    top: -15.625rem;
+    right: -25rem;
+    width: 62.5rem; /* Adjust size as needed */
+    height: auto;
+    z-index: -1; /* Ensure it stays behind other content */
+}
+
+/*hviezda dole*/
+.bg-hviezda-2 img {
+    position: absolute;
+    bottom: -21.875rem;
+    left: -12.5rem;
+    width: 62.5rem; /* Adjust size as needed */
+    height: auto;
+    z-index: -1; /* Ensure it stays behind other content */
+}
+
+/*oko*/
+.bg-oko img {
+    position: absolute;
+    bottom: -7.5rem;
+    right: -1.875rem;
+    width: 31.25rem; /* Adjust size as needed */
+    height: auto;
+    transform: rotate(15deg);
+    z-index: -1; /* Ensure it stays behind other content */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* logo*/
+h2 {
+     font-family: 'CS Quiver Demo', sans-serif;
+    font-size: 1.563rem;
+    letter-spacing: 0.063rem;
+    color: #1b35b8;
+    font-weight: lighter;
+    
+}
+
+
+
 .top{
     position:absolute;
     left:50%;
@@ -80,6 +240,7 @@ h2 {
 
 
 
+/* FOOTER */
 footer {
     position: fixed;
     bottom: 0;
@@ -92,24 +253,81 @@ footer {
     z-index: 100;
 }
 
+
+/* DESK CONTAINER */
 .desk-container {
     /* 1. Limit the width */
-    max-width: 800px;  /* Standard readable width */
+    max-width: 62.5rem;  /* Standard readable width */
     width: 90%;        /* Fits nicely on smaller screens too */
     
     /* 2. Center the block itself */
     margin: 0 auto;    /* "0" top/bottom, "auto" left/right centers it */
     
     /* 3. Center the text inside */
-    text-align: center; 
+    text-align: justify; 
     
     /* Optional: Add some breathing room */
-    padding: 40px 20px;
+    padding: 2.5rem 1.25rem;
 }
 
-/* Optional: Make the text nicer to read */
-.desk-container p {
-    line-height: 1.6;  /* Adds space between lines */
-    margin-bottom: 30px;
-    color: #333;
+
+
+
+
+/* BACK BUTTON*/
+.back-btn-retro {
+    /* Positioning */
+    position: fixed;
+    bottom: 1.875rem;
+    left: 1.875rem;
+    z-index: 50;
+
+    /* Retro Block Styling */
+    display: inline-block;
+    background-color: #000; /* Vintage Cream/Yellow */
+    color: #fff; /* Dark Brown Text */
+    text-decoration: none;
+    
+    /* Typewriter Font */
+    font-family: 'Arial', sans-serif; 
+    font-size: 1.2rem;
+    font-weight: 100;
+    text-transform: lowercase; /* All caps for retro feel */
+    letter-spacing: 0.063rem;
+    
+    padding: 1.25rem 1.25rem;
+    
+    /* The "Hard" Retro Border & Shadow */
+    border: 0.125rem solid #0000;
+   
+    
+    /* Initial Tilt */
+
+    transition: all 0.1s ease; /* Fast transition for mechanical feel */
+}
+
+/* Hover Effect: Wiggles slightly */
+.back-btn-retro:hover {
+    transform: rotate(0deg) translate(-0.125rem, -0.125rem);
+    background-color: #000;
+    cursor: pointer;
+}
+
+/* Active (Click) Effect: Simulates pressing a physical button */
+.back-btn-retro:active {
+    color: #fff;
+    box-shadow: 0rem 0rem 0rem #0000; /* Shadow disappears */
+    transform: translate(0.25rem, 0.25rem) rotate(0deg); /* Moves down to where shadow was */
+}
+
+/* The Dark Background */
+#popup-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Dark see-through */
+    z-index: 999; /* Sit on top of everything */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

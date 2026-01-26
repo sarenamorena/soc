@@ -5,8 +5,8 @@
 
     /* FIXED: Switched variables to use drop-shadow filter syntax instead of box-shadow values */
     /* A slightly darker, tighter shadow looks better for cut paper */
-    --paper-drop-shadow: drop-shadow(0 8px 12px rgba(0,0,0,0.25));
-    --paper-hover-drop-shadow: drop-shadow(0 15px 20px rgba(0,0,0,0.35));
+    --paper-drop-shadow: drop-shadow(0 0.5rem 0.75rem rgba(0,0,0,0.25));
+    --paper-hover-drop-shadow: drop-shadow(0 0.938rem 1.25rem rgba(0,0,0,0.35));
 
 
 }
@@ -49,8 +49,8 @@ body {
 
 h1 {
     font-family: 'CS Quiver Demo', sans-serif;
-    font-size: 50px;
-    letter-spacing: 2px;
+    font-size: 3.125rem;
+    letter-spacing: 0.125rem;
     color: var(--text-charcoal);
     font-weight: 100;
     
@@ -58,9 +58,10 @@ h1 {
 
 h2 {
     font-family: 'CS Quiver Demo', sans-serif;
-    font-size: 25px;
-    letter-spacing: 1px;
+    font-size: 1.563rem;
+    letter-spacing: 0.063rem;
     color: #1b35b8;
+    font-weight: lighter;
     
 }
 .top{
@@ -134,7 +135,7 @@ h2 {
     flex-direction: column;
     align-items: center;
     gap: 2rem;
-    padding-bottom: 80px; /* Space for footer */
+    padding-bottom: 5rem; /* Space for footer */
 }
 
 /* Random rotations for mobile organic feel */
@@ -174,7 +175,7 @@ h2 {
 
     .paper-link {
         position: absolute;
-        max-width: 180px; /* Increased slightly for desktop view */
+        max-width: 11.25rem; /* Increased slightly for desktop view */
     }
 
     /* SCATTER COORDINATES */
@@ -184,7 +185,7 @@ h2 {
         top: 30%;
         left: 20%;
         transform: rotate(-10deg);
-         max-width: 250px;
+         max-width: 15.625rem;
     }
 
     /* Top Right */
@@ -192,7 +193,7 @@ h2 {
         top: 25%;
         right: 25%;
         transform: rotate(10deg);
-        max-width: 150px;
+        max-width: 9.375rem;
     }
 
    
@@ -202,7 +203,7 @@ h2 {
         bottom: 20%;
         left: 62%;
         transform: rotate(-8deg);
-        max-width: 250px;
+        max-width: 15.625rem;
     }
 
     /* Middle Top/Rightish */
@@ -210,13 +211,13 @@ h2 {
         top: 65%;
         left: 25%; /* Overlapping vibe */
         transform: rotate(-20deg);
-        max-width: 200px;
+        max-width: 12.5rem;
     }
 
     .pos-6 {
         top: 20%;
         right: 50%;
-        max-width: 150px;
+        max-width: 9.375rem;
     }
 
 }
@@ -243,7 +244,7 @@ footer {
     pointer-events: none; /* Allows clicking through the image */
     z-index: 1; /* Low z-index so they sit BEHIND the interactive papers (which are usually z-index 10+) */
     opacity: 0.8; /* Slight transparency helps them blend in */
-    filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1));
+    filter: drop-shadow(0 0.125rem 0.313rem rgba(0,0,0,0.1));
 }
 
 /* DESKTOP POSITIONS (Scatter them around) */
@@ -252,28 +253,28 @@ footer {
         top: 29%;
         left: 15%;
         transform: rotate(240deg);
-        width: 80px;
+        width: 5rem;
     }
 
     .deco-2 {
         bottom: 13%;
         left: 23%;
         transform: rotate(-180deg);
-        width: 70px;
+        width: 4.375rem;
     }
 
     .deco-3 {
         top: 20%;
         right: 23%;
         transform: rotate(15deg);
-        width: 80px;
+        width: 5rem;
     }
 
     .deco-4 {
         top: 68%;
         right: 17%;
         transform: rotate(60deg);
-        width: 80px;
+        width: 5rem;
     }
 }
 
@@ -294,14 +295,14 @@ footer {
 
 .feedback-box {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
+    bottom: 1.875rem;
+    right: 1.875rem;
     background: #f3eee8;
-    padding: 20px;
+    padding: 1.25rem;
     z-index: 1000;
     /* Hard retro shadow */
     text-align: center;
-    max-width: 300px;
+    max-width: 18.75rem;
     
     /* Animation for appearing */
     animation: slideUp 0.5s ease-out;
@@ -313,22 +314,22 @@ footer {
     font-weight: 100;
     font-size: 1.1rem;
     color: #000;
-    margin-bottom: 15px;
+    margin-bottom: 0.938rem;
     text-transform: lowercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.063rem;
 }
 
 .feedback-buttons {
     display: flex;
-    gap: 15px;
+    gap: 0.938rem;
     justify-content: center;
 }
 
 .retro-btn {
     background-color: #000000;
     color: #f3eee8;
-    border: 2px solid #000000;
-    padding: 8px 20px;
+    border: 0.125rem solid #000000;
+    padding: 0.5rem 1.25rem;
     font-family: inherit;
     font-weight: 100;
     font-size: 0.9rem;
@@ -342,8 +343,8 @@ footer {
     background-color: #f3eee8;
     color: #000000;
     /* Hard shadow shift */
-    box-shadow: 3px 3px 0px rgba(0,0,0,0.5);
-    transform: translate(-2px, -2px);
+    box-shadow: 0.188rem 0.188rem 0rem rgba(0,0,0,0.5);
+    transform: translate(-0.125rem, -0.125rem);
 }
 
 .retro-btn:active {
@@ -352,7 +353,7 @@ footer {
 }
 
 @keyframes slideUp {
-    from { transform: translateY(50px); opacity: 0; }
+    from { transform: translateY(3.125rem); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
 }
 
@@ -361,7 +362,7 @@ footer {
     .feedback-box {
         right: 50%;
         transform: translateX(50%); /* Start centered */
-        bottom: 20px;
+        bottom: 1.25rem;
         width: 90%;
         /* We need to override the animation transform for centering to work */
         animation: none; 

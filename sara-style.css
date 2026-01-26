@@ -5,8 +5,8 @@
 
     /* FIXED: Switched variables to use drop-shadow filter syntax instead of box-shadow values */
     /* A slightly darker, tighter shadow looks better for cut paper */
-    --paper-drop-shadow: drop-shadow(0 8px 12px rgba(0,0,0,0.25));
-    --paper-hover-drop-shadow: drop-shadow(0 15px 20px rgba(0,0,0,0.35));
+    --paper-drop-shadow: drop-shadow(0 0.5rem 0.75rem rgba(0,0,0,0.25));
+    --paper-hover-drop-shadow: drop-shadow(0 0.938rem 1.25rem rgba(0,0,0,0.35));
 
 }
 @font-face {
@@ -49,31 +49,33 @@ body {
 
 h1 {
     font-family: 'CS Quiver Demo', sans-serif;
-    font-size: 50px;
-    letter-spacing: 2px;
+    font-size: 3.125rem;
+    letter-spacing: 0.125rem;
     color: var(--text-charcoal);
     font-weight: 100;
     position: absolute;
-    bottom: 20px;
-    right: 550px;
+    bottom: 1.25rem;
+    right: 34.375rem;
     
     
 }
 
 h2 {
     font-family:'CS Quiver Demo', sans-serif;
-    font-size: 25px;
-    letter-spacing: 1px;
+    font-size: 1.563rem;
+    letter-spacing: 0.063rem;
     color: #1b35b8;
+    font-weight: lighter;
     
 }
 
 h3 {
     font-family: 'CS Quiver Demo', sans-serif;
-    font-size: 35px;
-    letter-spacing: 1px;
+    font-size: 2.188rem;
+    letter-spacing: 0.125rem;
     color: #f3eee8;
     margin-bottom: 1rem;
+    font-weight: lighter;
 }
 
 .top{
@@ -91,15 +93,15 @@ h3 {
     opacity: 0.6;
     margin-top: 0.5rem;
     position: relative;
-    bottom: 20px;
-    right: 630px;
+    bottom: 1.25rem;
+    right: 39.375rem;
 }
 
 .postava-img {
     position: absolute;
-    bottom: -40px;
-    left: 420px;  
-    width: 700px; 
+    bottom: -2.5rem;
+    left: 26.25rem;  
+    width: 43.75rem; 
     transform: rotate(10deg);
     height: auto;
     z-index: 0;
@@ -167,7 +169,7 @@ h3 {
     flex-direction: column;
     align-items: center;
     gap: 2rem;
-    padding-bottom: 80px; /* Space for footer */
+    padding-bottom: 5rem; /* Space for footer */
 }
 
 /* Random rotations for mobile organic feel */
@@ -207,7 +209,7 @@ h3 {
 
     .paper-link {
         position: absolute;
-        max-width: 180px; /* Increased slightly for desktop view */
+        max-width: 11.25rem; /* Increased slightly for desktop view */
     }
 
     /* SCATTER COORDINATES */
@@ -217,7 +219,7 @@ h3 {
         top: 30%;
         left: 57%;
         transform: rotate(-10deg);
-         max-width: 200px;
+         max-width: 12.5rem;
     }
 
     /* Top Right */
@@ -225,7 +227,7 @@ h3 {
         top: 10%;
         left: 40%;
         transform: rotate(10deg);
-        max-width: 150px;
+        max-width: 9.375rem;
     }
 
    
@@ -235,7 +237,7 @@ h3 {
         bottom: 46%;
         right: 55%;
         transform: rotate(-8deg);
-        max-width: 250px;
+        max-width: 15.625rem;
     }
 
     /* Middle Top/Rightish */
@@ -243,13 +245,13 @@ h3 {
         top: 10%;
         right: 35%; /* Overlapping vibe */
         transform: rotate(-20deg);
-        max-width: 200px;
+        max-width: 12.5rem;
     }
 
     .pos-6 {
         top: 20%;
         right: 50%;
-        max-width: 150px;
+        max-width: 9.375rem;
     }
 
 }
@@ -275,7 +277,7 @@ footer {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.4); /* Semi-transparent dark dim */
-    backdrop-filter: blur(3px); /* Optional: blurs the background slightly */
+    backdrop-filter: blur(0.188rem); /* Optional: blurs the background slightly */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -287,8 +289,8 @@ footer {
 .back-btn-retro {
     /* Positioning */
     position: absolute;
-    bottom: 30px;
-    left: 30px;
+    bottom: 1.875rem;
+    left: 1.875rem;
     z-index: 50;
 
     /* Retro Block Styling */
@@ -302,12 +304,12 @@ footer {
     font-size: 1.2rem;
     font-weight: 100;
     text-transform: lowercase; /* All caps for retro feel */
-    letter-spacing: 1px;
-    
-    padding: 10px 20px;
-    
+    letter-spacing: 0.125rem;
+
+    padding: 0.625rem 1.25rem; /* Vertical | Horizontal Padding */
+
     /* The "Hard" Retro Border & Shadow */
-    border: 2px solid #0000;
+    border: 0.125rem solid #0000;
    
     
     /* Initial Tilt */
@@ -317,7 +319,7 @@ footer {
 
 /* Hover Effect: Wiggles slightly */
 .back-btn-retro:hover {
-    transform: rotate(0deg) translate(-1px, -1px);
+    transform: rotate(0deg) translate(-0.063rem, -0.063rem);
     background-color: #000;
     cursor: pointer;
 }
@@ -325,8 +327,8 @@ footer {
 /* Active (Click) Effect: Simulates pressing a physical button */
 .back-btn-retro:active {
     color: #fff;
-    box-shadow: 0px 0px 0px #0000; /* Shadow disappears */
-    transform: translate(4px, 4px) rotate(0deg); /* Moves down to where shadow was */
+    box-shadow: 0rem 0rem 0rem #0000; /* Shadow disappears */
+    transform: translate(0.25rem, 0.25rem) rotate(0deg); /* Moves down to where shadow was */
 }
 
 /* The Dark Background */
@@ -344,19 +346,19 @@ footer {
 /* The White Box */
 .popup-content {
     background: white;
-    padding: 40px;
+    padding: 2.5rem;
     width: 90%;
-    max-width: 600px; /* Limits width on big screens */
-    border-radius: 10px;
+    max-width: 37.5rem; /* Limits width on big screens */
+    border-radius: 0.625rem;
     position: relative;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    box-shadow: 0 0.625rem 1.563rem rgba(0,0,0,0.5);
 }
 
 /* The X Button */
 .close-btn {
     position: absolute;
-    top: 10px; right: 20px;
-    font-size: 30px;
+    top: 0.625rem; right: 1.25rem;
+    font-size: 1.875rem;
     cursor: pointer;
     font-weight: bold;
     color: #f3eee8;
@@ -374,8 +376,8 @@ footer {
     display: flex;
     flex-direction: row; /* Ensures they are side-by-side */
     align-items: flex-start; /* Aligns text to the top of the image */
-    gap: 25px; /* Adds space between the image and the text */
-    margin-top: 20px; /* Adds some space between the title and content */
+    gap: 1.563rem; /* Adds space between the image and the text */
+    margin-top: 1.25rem; /* Adds some space between the title and content */
 }
 
 /* Controls the size of the image in this layout */
@@ -383,14 +385,14 @@ footer {
     width: 40%; /* The image will take up 40% of the space */
     height: auto; /* Keeps the image proportions correct */
     flex-shrink: 0; /* Prevents the image from being squished */
-    border-radius: 12px; /* Optional: Makes the corners rounder */
+    border-radius: 0.75rem; /* Optional: Makes the corners rounder */
     object-fit: cover; /* Ensures the image fills its box nicely */
 }
 
 /* Controls the text block */
 .side-by-side-container .text-content {
     flex: 1; /* The text will take up all remaining space */
-    font-size: 15px; /* Optional: Makes text slightly larger and easier to read */
+    font-size: 0.938rem; /* Optional: Makes text slightly larger and easier to read */
     line-height: 1.6;
     color: #f3eee8;
     text-align: justify; /* Optional: Adds space between lines of text */
@@ -416,22 +418,22 @@ footer {
     font-weight: bold;
     display: inline-block; 
     width: 1.5em;      /* Space between the star and the text */
-    margin-left: 10px; /* Indentation */
+    margin-left: 0.625rem; /* Indentation */
 }
 
 /* Optional: Add spacing between the points */
 .star-list li {
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem;
 }
 
 .popup-content {
     background: white;
-    padding: 40px;
+    padding: 2.5rem;
     width: 90%;
-    max-width: 600px;
-    border-radius: 10px;
+    max-width: 37.5rem;
+    border-radius: 0.625rem;
     position: relative;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    box-shadow: 0 0.625rem 1.563rem rgba(0,0,0,0.5);
 
     /* --- ADD THESE 2 LINES --- */
     max-height: 80vh;   /* Limit height to 80% of the screen */
@@ -444,21 +446,21 @@ footer {
 
 /* The width of the scrollbar */
 .popup-content::-webkit-scrollbar {
-    width: 12px;
+    width: 0.75rem;
 }
 
 /* The Track (background of the scrollbar) */
 .popup-content::-webkit-scrollbar-track {
     background: #ff2020; /* red */
-    border-radius: 10px;             /* Rounded corners */
-    margin: 10px 0;                  /* Keeps it away from top/bottom edges */
+    border-radius: 0.625rem;             /* Rounded corners */
+    margin: 0.625rem 0;                  /* Keeps it away from top/bottom edges */
 }
 
 /* The Thumb (the moving part you drag) */
 .popup-content::-webkit-scrollbar-thumb {
     background-color: #f3eee8;          /* Grey color */
-    border-radius: 10px;             /* Rounded corners */
-    border: 3px solid transparent;   /* Adds a white border around it for a "floating" look */
+    border-radius: 0.625rem;             /* Rounded corners */
+    border: 0.188rem solid transparent;   /* Adds a white border around it for a "floating" look */
     background-clip: content-box;    /* Ensures the border works */
 }
 
