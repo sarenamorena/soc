@@ -2,28 +2,22 @@
 :root {
     --bg-color: #f3eee8;
     --text-charcoal: #000000;
-
-    /* FIXED: Switched variables to use drop-shadow filter syntax instead of box-shadow values */
-    /* A slightly darker, tighter shadow looks better for cut paper */
     --paper-drop-shadow: drop-shadow(0 0.5rem 0.75rem rgba(0,0,0,0.25));
     --paper-hover-drop-shadow: drop-shadow(0 0.938rem 1.25rem rgba(0,0,0,0.35));
-
-
 }
+
 @font-face {
     font-family: 'CS Quiver Demo';
-    src: url('fonts/CsQuiverRegularDemo-ov0o0.otf') format('opentype');
-    /* Note: If your CSS file is inside a folder (like css/style.css), 
-       use url('../fonts/PatrickHand-Regular.ttf') instead. */
+    /* Ensure these paths are correct relative to your CSS file */
+    src: url('/fonts/CsQuiverRegularDemo-ov0o0.otf') format('opentype');
 }
 
-/* 2. Define Permanent Marker */
 @font-face {
-    font-family: 'Arial';
+    font-family: 'ArialCustom'; /* Renamed to avoid conflict with system Arial */
     src: url('fonts/ARIAL.TTF') format('truetype');
 }
 
- * {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -31,29 +25,21 @@
 
 body {
     background-color: var(--bg-color);
-    font-family: 'Arial';
+    font-family: 'Arial', sans-serif;
     color: var(--text-charcoal);
     min-height: 100vh;
-    overflow-x: hidden; /* Prevent horizontal scroll from rotated elements */
+    overflow-x: hidden;
     position: relative;
+    line-height: 1.6; /* Better readability */
 }
 
-/* --- TITLE STYLES --- */
-.title-container {
-    text-align: center;
-    z-index: 10; /* Ensures title sits above papers if they overlap */
-    pointer-events: none; /* Allows clicking through text area if needed */
-    margin-bottom: 2rem;
-    padding-top: 2rem;
-}
-
+/* --- TYPOGRAPHY --- */
 h1 {
     font-family: 'CS Quiver Demo', sans-serif;
     font-size: 3.125rem;
     letter-spacing: 0.125rem;
     color: var(--text-charcoal);
     font-weight: 100;
-    
 }
 
 h2 {
@@ -62,17 +48,26 @@ h2 {
     letter-spacing: 0.063rem;
     color: #1b35b8;
     font-weight: lighter;
-    
 }
-.top{
-    position:absolute;
-    left:50%;
+
+/* --- COMMON ELEMENTS --- */
+.top {
+    position: absolute;
+    left: 50%;
     top: 1rem;
     transform: translateX(-50%);
-
+    width: 100%;
+    text-align: center;
+    z-index: 10;
 }
 
-
+.title-container {
+    text-align: center;
+    z-index: 10;
+    pointer-events: none;
+    margin-bottom: 2rem;
+    padding-top: 5rem; /* Pushed down so it doesn't hit the top H2 */
+}
 
 .title-container p {
     font-size: 1rem;
@@ -80,84 +75,112 @@ h2 {
     margin-top: 0.5rem;
 }
 
-/* --- PAPER ELEMENTS (Shared Styles) --- */
+/* --- PAPER LINKS --- */
 .paper-link {
     display: block;
     text-decoration: none;
-    /* Transition on the container for movement/rotation */
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     width: fit-content;
-    margin: 0 auto;
-    /* Ensure the shadow doesn't get clipped by the link container */
-    overflow: visible;
+    margin: 0 auto; /* Centers in flex/block layouts */
 }
 
 .paper-content {
-    /* FIXED: Removed background: white and padding */
-    /* The container is now transparent, just holding the image */
     display: block;
     position: relative;
-
-    /* FIXED: Switched from box-shadow to filter: drop-shadow */
-    /* This makes the shadow follow the shape of the PNG image */
     filter: var(--paper-drop-shadow);
-
-    /* Transition for the shadow change on hover */
     transition: filter 0.3s ease;
-    /* Important: ensures the drop-shadow isn't clipped */
-    overflow: visible;
 }
 
 .paper-content img {
     display: block;
     max-width: 100%;
     height: auto;
-    /* Ensure the image itself doesn't have unintended borders */
-    border: none;
-    outline: none;
 }
 
 /* Hover Effects */
 .paper-link:hover {
-    z-index: 20; /* Bring hovered item to very top */
-    transform: scale(1.05) rotate(0deg) !important; /* Straighten and zoom container */
+    z-index: 20;
+    transform: scale(1.05) rotate(0deg) !important;
 }
 
 .paper-link:hover .paper-content {
-    /* FIXED: Apply the stronger drop-shadow filter on hover */
     filter: var(--paper-hover-drop-shadow);
 }
 
-/* --- MOBILE LAYOUT (Default) --- */
-/* On mobile, we stack them neatly so they are usable */
+
+/* =========================================
+   1. MOBILE LAYOUT (Default, < 768px)
+   ========================================= */
 .desk-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
-    padding-bottom: 5rem; /* Space for footer */
+    gap: 3rem; /* More space between items */
+    padding: 2rem 1.5rem 8rem 1.5rem; /* FIXED: Added side padding (1.5rem) */
+    width: 100%;
 }
 
-/* Random rotations for mobile organic feel */
+.paper-link {
+    max-width: 18rem; /* Prevents them from being too huge on large phones */
+}
+
+/* Subtle mobile rotations */
 .pos-1 { transform: rotate(-2deg); }
 .pos-2 { transform: rotate(3deg); }
-.pos-3 { transform: rotate(-1deg); }
 .pos-4 { transform: rotate(2deg); }
 .pos-5 { transform: rotate(-3deg); }
 
-/* --- DESKTOP LAYOUT (Min-width: 1024px) --- */
-/* Here we switch to the "Creative Scattered" Absolute layout */
+/* Hide decorations on mobile to keep it clean */
+.decoration-item {
+    display: none;
+}
+
+
+/* =========================================
+   2. TABLET LAYOUT (768px - 1023px)
+   ========================================= */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .desk-container {
+        display: grid; /* Use Grid instead of Flex */
+        grid-template-columns: 1fr 1fr; /* Two columns */
+        gap: 2rem;
+        padding: 8rem 4rem; /* More padding */
+        align-items: center;
+        justify-items: center;
+    }
+
+    .title-container {
+        grid-column: 1 / -1; /* Title spans full width */
+        padding-top: 0;
+        margin-bottom: 3rem;
+    }
+
+    /* Make images slightly smaller than mobile so 2 fit side-by-side */
+    .paper-link {
+        max-width: 14rem; 
+    }
+    
+    /* Alternating rotations for the "scattered" feel in a grid */
+    .paper-link:nth-child(odd) { transform: rotate(-4deg); margin-top: 2rem; }
+    .paper-link:nth-child(even) { transform: rotate(3deg); margin-bottom: 2rem; }
+}
+
+
+/* =========================================
+   3. DESKTOP LAYOUT (> 1024px)
+   ========================================= */
 @media (min-width: 1024px) {
     body, html {
         height: 100%;
-        overflow: hidden; /* Lock scroll for full-screen feel */
+        overflow: hidden;
     }
 
     .desk-container {
-        display: block; /* Disable flex */
+        display: block;
         position: relative;
         width: 100%;
         height: 100%;
+        padding: 0;
     }
 
     .title-container {
@@ -165,61 +188,44 @@ h2 {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        margin: 0;
-        padding: 0;
+        padding-top: 0;
     }
 
     h1 {
-        font-size: 10rem; /* Larger title on desktop */
+        font-size: 8rem; /* Slightly smaller than 10rem to be safe on laptops */
     }
 
     .paper-link {
         position: absolute;
-        max-width: 11.25rem; /* Increased slightly for desktop view */
+        max-width: 12rem;
     }
 
     /* SCATTER COORDINATES */
+    .pos-1 { top: 25%; left: 15%; transform: rotate(-10deg); max-width: 15rem; }
+    .pos-2 { top: 20%; right: 20%; transform: rotate(10deg); max-width: 10rem; }
+    /* pos-3 skipped in HTML, using pos-4 */
+    .pos-4 { bottom: 15%; left: 60%; transform: rotate(-8deg); max-width: 16rem; }
+    .pos-5 { top: 60%; left: 20%; transform: rotate(-20deg); max-width: 13rem; }
 
-    /* Top Left */
-    .pos-1 {
-        top: 30%;
-        left: 20%;
-        transform: rotate(-10deg);
-         max-width: 15.625rem;
+    /* DECORATIONS (Only show on desktop) */
+    .decoration-item {
+        display: block;
+        position: absolute;
+        pointer-events: none;
+        z-index: 1;
+        opacity: 0.8;
+        filter: drop-shadow(0 0.125rem 0.313rem rgba(0,0,0,0.1));
     }
 
-    /* Top Right */
-    .pos-2 {
-        top: 25%;
-        right: 25%;
-        transform: rotate(10deg);
-        max-width: 9.375rem;
-    }
+    .deco-1 { top: 29%; left: 15%; transform: rotate(240deg); width: 5rem; }
+    .deco-2 { bottom: 13%; left: 23%; transform: rotate(-180deg); width: 4.375rem; }
+    .deco-3 { top: 20%; right: 23%; transform: rotate(15deg); width: 5rem; }
+    .deco-4 { top: 68%; right: 17%; transform: rotate(60deg); width: 5rem; }
+}
 
-   
-
-    /* Bottom Right */
-    .pos-4 {
-        bottom: 20%;
-        left: 62%;
-        transform: rotate(-8deg);
-        max-width: 15.625rem;
-    }
-
-    /* Middle Top/Rightish */
-    .pos-5 {
-        top: 65%;
-        left: 25%; /* Overlapping vibe */
-        transform: rotate(-20deg);
-        max-width: 12.5rem;
-    }
-
-    .pos-6 {
-        top: 20%;
-        right: 50%;
-        max-width: 9.375rem;
-    }
-
+.brand-logo {
+    text-decoration: none;
+    color: currentColor;
 }
 
 /* --- FOOTER --- */
@@ -231,68 +237,12 @@ footer {
     text-align: center;
     font-size: 0.8rem;
     color: #888;
-    background-color: transparent; /* Slight transparency */
+    background-color: transparent;
     z-index: 100;
+    pointer-events: none; /* Let clicks pass through footer area */
 }
 
-/* =========================================
-   DECORATION ITEMS
-   ========================================= */
-
-.decoration-item {
-    position: absolute;
-    pointer-events: none; /* Allows clicking through the image */
-    z-index: 1; /* Low z-index so they sit BEHIND the interactive papers (which are usually z-index 10+) */
-    opacity: 0.8; /* Slight transparency helps them blend in */
-    filter: drop-shadow(0 0.125rem 0.313rem rgba(0,0,0,0.1));
-}
-
-/* DESKTOP POSITIONS (Scatter them around) */
-@media (min-width: 1024px) {
-    .deco-1 {
-        top: 29%;
-        left: 15%;
-        transform: rotate(240deg);
-        width: 5rem;
-    }
-
-    .deco-2 {
-        bottom: 13%;
-        left: 23%;
-        transform: rotate(-180deg);
-        width: 4.375rem;
-    }
-
-    .deco-3 {
-        top: 20%;
-        right: 23%;
-        transform: rotate(15deg);
-        width: 5rem;
-    }
-
-    .deco-4 {
-        top: 68%;
-        right: 17%;
-        transform: rotate(60deg);
-        width: 5rem;
-    }
-}
-
-/* MOBILE POSITIONS (Hide or simplify) */
-@media (max-width: 1023px) {
-    /* Often best to hide decorations on mobile to save space */
-    .decoration-item {
-        display: none; 
-    }
-    
-    /* OR if you want them, position them absolutely relative to the document flow */
-    /* .decoration-item { position: fixed; ... } */
-}
-
-/* =========================================
-   FEEDBACK WIDGET STYLES
-   ========================================= */
-
+/* --- FEEDBACK WIDGET --- */
 .feedback-box {
     position: fixed;
     bottom: 1.875rem;
@@ -300,23 +250,18 @@ footer {
     background: #f3eee8;
     padding: 1.25rem;
     z-index: 1000;
-    /* Hard retro shadow */
     text-align: center;
     max-width: 18.75rem;
-    
-    /* Animation for appearing */
     animation: slideUp 0.5s ease-out;
     transition: opacity 0.5s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border: 1px solid #000;
 }
 
 .feedback-text {
-    font-family: 'Arial', sans-serif; /* Or your retro font */
     font-weight: 100;
     font-size: 1.1rem;
-    color: #000;
     margin-bottom: 0.938rem;
-    text-transform: lowercase;
-    letter-spacing: 0.063rem;
 }
 
 .feedback-buttons {
@@ -330,26 +275,15 @@ footer {
     color: #f3eee8;
     border: 0.125rem solid #000000;
     padding: 0.5rem 1.25rem;
-    font-family: inherit;
-    font-weight: 100;
-    font-size: 0.9rem;
     cursor: pointer;
-    text-transform: lowercase;
     transition: all 0.2s;
 }
 
-/* Hover Effect: Invert Colors */
 .retro-btn:hover {
     background-color: #f3eee8;
     color: #000000;
-    /* Hard shadow shift */
     box-shadow: 0.188rem 0.188rem 0rem rgba(0,0,0,0.5);
     transform: translate(-0.125rem, -0.125rem);
-}
-
-.retro-btn:active {
-    transform: translate(0, 0);
-    box-shadow: none;
 }
 
 @keyframes slideUp {
@@ -357,16 +291,13 @@ footer {
     to { transform: translateY(0); opacity: 1; }
 }
 
-/* Mobile Tweak: Center it on phone */
+/* Mobile Tweak for Widget */
 @media (max-width: 600px) {
     .feedback-box {
         right: 50%;
-        transform: translateX(50%); /* Start centered */
-        bottom: 1.25rem;
+        transform: translateX(50%);
+        bottom: 1rem;
         width: 90%;
-        /* We need to override the animation transform for centering to work */
-        animation: none; 
+        animation: none;
     }
 }
-
-
