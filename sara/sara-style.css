@@ -1,0 +1,255 @@
+/* --- VARIABLES & RESET --- */
+:root {
+    --bg-color: #f3eee8;
+    --text-color: #000000;
+    --shadow-sm: drop-shadow(0 0.5rem 0.75rem rgba(0,0,0,0.25));
+    --shadow-lg: drop-shadow(0 1rem 1.25rem rgba(0,0,0,0.35));
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+
+@font-face {
+    font-family: 'CS Quiver Demo';
+    src: url('/fonts/CsQuiverRegularDemo-ov0o0.otf') format('opentype');
+}
+
+
+body {
+    background-color: var(--bg-color);
+    font-family: 'Arial', sans-serif; /* Fallback */
+    color: var(--text-color);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* --- MOBILE LAYOUT (Default) --- */
+main {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+}
+
+.page-header {
+    text-align: center;
+    margin-top: 4rem; /* Space for back button */
+    margin-bottom: 2rem;
+}
+
+h1 { font-size: 3rem; font-weight: 100; letter-spacing: 2px; font-family: 'CS Quiver Demo'; }
+h2 { color: #1b35b8; font-size: 1.2rem; letter-spacing: 1px; font-family: 'CS Quiver Demo';  }
+h3 {  font-family: 'CS Quiver Demo';  }
+.main-title p { opacity: 0.6; margin-top: 0.5rem; }
+
+/* The Container for Character + Items */
+.scene-container {
+    width: 100%;
+    max-width: 500px; /* Limit width on tablets */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* Character on Mobile */
+.character-wrapper {
+    width: 80%; /* Don't take full width */
+    max-width: 300px;
+    z-index: 1;
+}
+
+.character-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* The Grid for Items (Mobile) */
+.items-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2x2 Grid */
+    gap: 1.5rem;
+    width: 100%;
+    padding-bottom: 4rem;
+}
+
+/* Item Links (Buttons) */
+.item-link {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    filter: var(--shadow-sm);
+    /* Mobile Rotation Jiggle */
+}
+.item-link:nth-child(odd) { transform: rotate(-3deg); }
+.item-link:nth-child(even) { transform: rotate(3deg); }
+
+.item-link img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* --- DESKTOP LAYOUT (> 1024px) --- */
+@media (min-width: 1024px) {
+    body {
+        height: 100vh;
+        overflow: hidden; /* Lock scroll */
+    }
+
+    main {
+        display: block;
+        padding: 0;
+        height: 100%;
+        position: relative;
+    }
+
+    /* Absolute Title Positioning */
+    .page-header {
+        position: absolute;
+        top: 20%;
+        left: 10%;
+        text-align: left;
+        margin: 0;
+        z-index: 10;
+    }
+    
+    h1 { font-size: 6rem; }
+
+    /* Scene Container becomes the "Stage" */
+    .scene-container {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        max-width: none; /* Remove mobile limit */
+        display: block; /* Remove flex */
+    }
+
+    /* Character Positioning */
+    .character-wrapper {
+        position: absolute;
+        bottom: -5%; /* Slight overlap offscreen looks artistic */
+        left: 50%;
+        transform: translateX(-50%) rotate(5deg);
+        width: 75vh; /* Scale relative to height */
+        max-width: none;
+    }
+
+    /* Items Wrapper becomes full screen overlay */
+    .items-wrapper {
+        display: block; /* Kill grid */
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        pointer-events: none; /* Let clicks pass through empty space */
+    }
+
+    .item-link {
+        position: absolute; /* Unlock absolute positioning */
+        width: 140px; /* Fixed sizing for desktop */
+        pointer-events: auto; /* Re-enable clicking */
+    }
+
+    .item-link:hover {
+        transform: scale(1.1) rotate(0deg) !important;
+        filter: var(--shadow-lg);
+        z-index: 20;
+    }
+
+    /* --- SCATTER COORDINATES (Relative to center) --- */
+    /* Adjust these % to fit around the character head */
+    
+    /* Top Right (Ear area) */
+    .pos-1 { top: 25%; left: 60%; transform: rotate(-10deg); }
+    
+    /* Top Left (Eye area) */
+    .pos-2 { top: 15%; left: 35%; transform: rotate(10deg); }
+    
+    /* Bottom Right (Shoulder) */
+    .pos-3 { bottom: 30%; right: 25%; transform: rotate(-8deg); }
+    
+    /* Bottom Left/Mid */
+    .pos-4 { top: 45%; left: 25%; transform: rotate(-15deg); }
+}
+
+/* --- POPUP STYLES --- */
+#popup-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+#popup-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.popup-box {
+    background: white;
+    width: 90%;
+    max-width: 800px;
+    max-height: 85vh;
+    padding: 2.5rem;
+    border-radius: 1rem;
+    position: relative;
+    overflow-y: auto; /* Scrollable content */
+    box-shadow: 0 1rem 3rem rgba(0,0,0,0.5);
+    transition: background-color 0.4s ease;
+}
+
+.close-btn {
+    position: absolute;
+    top: 1rem; right: 1.5rem;
+    font-size: 2rem;
+    border: none;
+    background: none;
+    color: white; /* Contrast against colored bg */
+    cursor: pointer;
+}
+
+.side-by-side {
+    display: flex;
+    flex-wrap: wrap; /* Wraps on mobile */
+    gap: 1.5rem;
+}
+.content-img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 0.5rem;
+}
+.text-block { flex: 1; min-width: 250px; color: #fff; line-height: 1.6; }
+h3 { color: #fff; font-size: 2rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+
+/* Custom Scrollbar */
+.popup-box::-webkit-scrollbar { width: 8px; }
+.popup-box::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
+.popup-box::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.5); border-radius: 4px; }
+
+/* Retro Back Button */
+.back-btn-retro {
+    position: absolute;
+    top: 1rem; left: 1rem;
+    background: #000;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    font-weight: bold;
+    z-index: 100;
+    transition: transform 0.2s;
+}
+.back-btn-retro:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 rgba(0,0,0,0.2); }
