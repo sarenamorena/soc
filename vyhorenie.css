@@ -163,53 +163,6 @@ p3 {
     
 }
 
-/* OBRÁZKY */
-/* hviezda hore */
-.bg-hviezda-1 img {
-    position: absolute;
-    top: -15.625rem;
-    right: -25rem;
-    width: 62.5rem; /* Adjust size as needed */
-    height: auto;
-    z-index: -1; /* Ensure it stays behind other content */
-}
-
-/*hviezda dole*/
-.bg-hviezda-2 img {
-    position: absolute;
-    bottom: -21.875rem;
-    left: -12.5rem;
-    width: 62.5rem; /* Adjust size as needed */
-    height: auto;
-    z-index: -1; /* Ensure it stays behind other content */
-}
-
-/*oko*/
-.bg-oko img {
-    position: absolute;
-    bottom: -7.5rem;
-    right: -1.875rem;
-    width: 31.25rem; /* Adjust size as needed */
-    height: auto;
-    transform: rotate(15deg);
-    z-index: -1; /* Ensure it stays behind other content */
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* logo*/
 h2 {
      font-family: 'CS Quiver Demo', sans-serif;
