@@ -68,12 +68,12 @@ h1 {
     
 }
 /* text1*/
-p1 {
+.content1 { 
     font-family: 'Arial', sans-serif;
     font-size: 0.938rem;
     letter-spacing: 0.063rem;
     color: #000000;
-    font-weight: lighter;
+    font-weight: normal;
     margin-top: 1.25rem;
     margin-right: 16.313rem;
     text-align: justify;
@@ -109,7 +109,7 @@ h4 {
 }
 
 /* text2*/
-p2 {
+.content2 { 
     font-family: 'Arial', sans-serif;
     font-size: 0.938rem;
     letter-spacing: 0.063rem;
@@ -125,20 +125,20 @@ p2 {
 }
 
 /* číslo 3*/
-h7 {    
+.numbers3 {
      font-family: 'Agnes', sans-serif;
     font-size: 25rem;
     letter-spacing: 0.063rem;
     color: #f1d135;
     position: absolute;
-    left: 5.625rem;
-    top: 75rem;
+    left: 4rem;
+    top: 86rem;
 }
 
 /* ako mu predísť?*/
 h3 {
     font-family: 'CS Quiver Demo', sans-serif;
-    font-size: 3.125rem;
+    font-size: 5.625rem;
     letter-spacing: 0.125rem;
     color: #f1d135;
     font-weight: 100;
@@ -148,7 +148,7 @@ h3 {
 }
 
 /* text3*/
-p3 {    
+.content3 {    
     font-family: 'Arial', sans-serif;
     font-size: 0.938rem;
     letter-spacing: 0.063rem;
