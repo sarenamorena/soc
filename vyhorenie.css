@@ -1,240 +1,286 @@
-/* --- RESET & VARIABLES --- */
 :root {
     --bg-color: #f3eee8;
-    --text-color: #000000;
-    --accent-blue: #1b35b8;
-    
-    /* Make sure this path is 100% correct in your folder */
-    --font-artsy: 'CS Quiver Demo', 'Impact', 'Arial Black', sans-serif; 
-    --font-body: 'Arial', sans-serif;
+    --text-charcoal: #000000;
+
+
+}
+@font-face {
+    font-family: 'CS Quiver Demo';
+    src: url('fonts/CsQuiverRegularDemo-ov0o0.otf') format('opentype');
+    /* Note: If your CSS file is inside a folder (like css/style.css), 
+       use url('../fonts/PatrickHand-Regular.ttf') instead. */
+}
+
+/* 2. Define Permanent Marker */
+@font-face {
+    font-family: 'Arial';
+    src: url('fonts/ARIAL.TTF') format('truetype');
 }
 
 @font-face {
-    font-family: 'CS Quiver Demo';
-    /* CHECK THIS PATH: If styles.css is in a 'css' folder, go back one step with '../fonts/...' */
-    src: url('fonts/CsQuiverRegularDemo-ov0o0.otf') format('opentype');
+    font-family: "Agnes";
+    src: url("fonts/Agnes-Regular.otf") format("opentype");
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+ *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 body {
     background-color: var(--bg-color);
-    font-family: var(--font-body);
-    color: var(--text-color);
-    line-height: 1.6;
+    font-family: 'Arial';
+    color: var(--text-charcoal);
+    min-height: 100vh;
+    overflow-x: hidden; /* Prevent horizontal scroll from rotated elements */
+    position: relative;
 }
 
-/* --- THE MAIN WRAPPER (Solves Issue #1) --- */
-.main-wrapper {
-    width: 90%;          /* Occupies 90% of the screen width */
-    max-width: 1000px;   /* Never gets wider than 1000px on giant screens */
-    margin: 0 auto;      /* Centers the container */
-    padding-bottom: 5rem;
-}
-
-/* --- HEADER (Solves Issue #3) --- */
-.page-header {
+/* TEXT */
+.title-container {
     text-align: center;
+    z-index: 10; /* Ensures title sits above papers if they overlap */
+    pointer-events: none; /* Allows clicking through text area if needed */
+    margin-bottom: 2rem;
     padding-top: 2rem;
-    margin-bottom: 5rem; /* Pushes content down away from title */
-    border-bottom: 2px solid var(--text-color); /* Optional: Adds a separator line */
-    padding-bottom: 3rem;
 }
 
-.brand-logo {
-    font-family: var(--font-artsy);
-    color: var(--accent-blue);
-    font-size: 1.5rem;
-    letter-spacing: 0.1rem;
-    margin-bottom: 1rem;
-    text-decoration: none;
-}
-
-.page-header h1 {
-    font-family: var(--font-artsy);
-    font-size: 4rem; /* Big main title */
-    line-height: 1.1;
-    font-weight: normal;
-}
-
-/* --- SECTIONS (Solves Issue #2) --- */
-.topic-row {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 5rem;
-    gap: 2rem;
-}
-
-/* Left Column: Number */
-.number-col {
-    flex: 0 0 100px; /* Fixed width for number area */
-    text-align: right; /* Align number to the right, close to text */
-}
-
-.giant-num {
-    display: block;
-    font-family: var(--font-artsy); /* Uses the artsy font */
-    font-size: 16rem; /* GIGANTIC */
-    line-height: 0.8; /* Tights line height so it doesn't push text down */
-    color: var(--accent-blue);
-    opacity: 0.8;
-}
-
-/* Right Column: Text */
-.text-col {
-    flex: 1; /* Takes remaining space */
-    padding-top: 1rem; /* Aligns visually with the top of the number */
-}
-
-.text-col h2 {
-    font-family: var(--font-artsy);
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-    line-height: 1.2;
-}
-
-.text-col p {
-    font-size: 1.1rem;
-    margin-bottom: 1.5rem;
-    text-align: justify; /* Keeps text blocks neat */
-}
-
-.text-col ul {
-    margin-left: 1.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.text-col li {
-    margin-bottom: 0.5rem;
-}
-
-/* --- NAVIGATION & FOOTER --- */
-.back-link {
-    display: inline-block;
-    font-family: var(--font-artsy);
-    font-size: 1.2rem;
-    color: var(--text-color);
-    text-decoration: none;
-    margin-top: 2rem;
-    border-bottom: 1px solid transparent;
-    transition: border 0.3s;
-}
-
-.back-link:hover {
-    border-bottom: 1px solid var(--text-color);
-}
-
-footer {
-    margin-top: 3rem;
-    color: #666;
-    font-size: 0.9rem;
-    text-align: center;
-}
-
-/* =========================================
-   MOBILE RESPONSIVENESS (< 768px)
-   ========================================= */
-@media (max-width: 768px) {
-    
-    .page-header h1 {
-        font-size: 2.5rem; /* Smaller H1 on phone */
-    }
-
-    .topic-row {
-        flex-direction: column; /* Stack Number on top of Text */
-        gap: 0; /* Remove horizontal gap */
-        margin-bottom: 4rem;
-    }
-
-    .number-col {
-        flex: auto;
-        text-align: left; /* Align number to left on mobile */
-        width: 100%;
-        margin-bottom: -10px; /* Pull text closer to number */
-    }
-
-    .giant-num {
-        font-size: 5rem; /* Smaller but still big */
-    }
-
-    .text-col {
-        padding-top: 0;
-    }
-}
-
-
-
-/* =========================================
-   BACKGROUND DECORATIONS
-   ========================================= */
-
-.deco-layer {
-    /*position: fixed;*/ /* Fixes them to the window (they don't scroll away) */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1; /* Puts them BEHIND the text */
-    pointer-events: none; /* Allows you to click links "through" the images */
-    overflow: hidden;
-}
-
-.deco-item {
+/* číslo 1*/
+h5 {
+     font-family: 'Agnes', sans-serif;
+    font-size: 25rem;
+    letter-spacing: 0.063rem;
+    color: #de7d8f;
     position: absolute;
-    opacity: 0.9; /* Slight transparency so text is readable over them */
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); /* Soft shadow for depth */
+    left: 5.625rem;
+    font-weight: lighter;
+}
+/* čo je vyhorenie?*/
+h1 {
+    font-family: 'CS Quiver Demo', sans-serif;
+    font-size: 5.625rem;
+    letter-spacing: 0.125rem;
+    color: #de7d8f;
+    font-weight: 100;
+    position: absolute;
+    left: 18.75rem;
+    
+}
+/* text1*/
+.content1 { 
+    font-family: 'Arial', sans-serif;
+    font-size: 0.938rem;
+    letter-spacing: 0.063rem;
+    color: #000000;
+    font-weight: normal;
+    margin-top: 1.25rem;
+    margin-right: 16.313rem;
+    text-align: justify;
+    position: absolute;
+    top: 11.25rem;
+    left: 19.375rem;
+    
 }
 
-/* --- POSITIONING THE ITEMS --- */
-
-/* Top Left Star */
-.item-star-1 {
-    top: 5%;
-    left: -2%;
-    width: 15rem;
-    transform: rotate(-15deg);
+/* číslo 2*/
+h6 {    
+     font-family: 'Agnes', sans-serif;
+    font-size: 25rem;
+    letter-spacing: 0.063rem;
+    color: #1b35b8;
+    position: absolute;
+    left: 2.5rem;
+    top: 43.75rem;
+    font-weight: lighter;
 }
 
-/* The Eye (Watching from the middle-right) */
-.item-eye {
-    top: 45%;
-    right: 5%;
-    width: 30rem;
-    opacity: 0.4; /* Make the eye a bit fainter */
+/* ako vzniká?*/
+h4 {
+    font-family: 'CS Quiver Demo', sans-serif;
+    font-size: 5.625rem;
+    letter-spacing: 0.125rem;
+    color: #1b35b8;
+    font-weight: 100;
+    position: absolute;
+    left: 18.75rem;
+    top: 45.625rem;
+    
 }
 
-/* Bottom Right Star */
-.item-star-2 {
-    top: 10%;
-    right: -2%;
-    width: 27rem;
-    transform: rotate(20deg);
+/* text2*/
+.content2 { 
+    font-family: 'Arial', sans-serif;
+    font-size: 0.938rem;
+    letter-spacing: 0.063rem;
+    color: #000000;
+    font-weight: lighter;
+    margin-top: 1.25rem;
+    margin-right: 16.313rem;
+    text-align: justify;
+    position: absolute;
+    top: 52.5rem;
+    left: 19.375rem;
+    
+}
+
+/* číslo 3*/
+.numbers3 {
+     font-family: 'Agnes', sans-serif;
+    font-size: 25rem;
+    letter-spacing: 0.063rem;
+    color: #f1d135;
+    position: absolute;
+    left: 4rem;
+    top: 86rem;
+}
+
+/* ako mu predísť?*/
+h3 {
+    font-family: 'CS Quiver Demo', sans-serif;
+    font-size: 5.625rem;
+    letter-spacing: 0.125rem;
+    color: #f1d135;
+    font-weight: 100;
+    position: absolute;
+    left: 18.75rem;        
+    top: 87.5rem;
+}
+
+/* text3*/
+.content3 {    
+    font-family: 'Arial', sans-serif;
+    font-size: 0.938rem;
+    letter-spacing: 0.063rem;
+    color: #000000;
+    font-weight: lighter;
+    margin-top: 1.25rem;
+    margin-right: 16.313rem;
+    text-align: justify;
+    position: absolute;
+    top: 90.625rem;
+    left: 19.375rem;
+    
+}
+
+/* logo*/
+h2 {
+     font-family: 'CS Quiver Demo', sans-serif;
+    font-size: 1.563rem;
+    letter-spacing: 0.063rem;
+    color: #1b35b8;
+    font-weight: lighter;
+    
 }
 
 
-/* =========================================
-   RESPONSIVE ADJUSTMENTS FOR DECORATIONS
-   ========================================= */
 
-/* On huge screens (Desktops), move them further out so they frame the content */
-@media (min-width: 1400px) {
-    .item-star-1 { left: 10%; }
-    .item-eye { right: 15%; }
-    .item-star-2 { right: 10%; }
+.top{
+    position:absolute;
+    left:50%;
+    top: 1rem;
+    transform: translateX(-50%);
+
 }
 
-/* On Tablets/Laptops, make them smaller */
-@media (max-width: 1024px) {
-    .item-star-1 { width: 90px; }
-    .item-star-2 { width: 100px; }
+
+
+.title-container p {
+    font-size: 1rem;
+    opacity: 0.6;
+    margin-top: 0.5rem;
 }
 
-/* On Mobile, hide or fade them significantly */
-@media (max-width: 768px) {
-    /* OPTION A: Hide them completely on phone (Cleanest) */
-    /* .deco-layer { display: none; } */
 
-    /* OPTION B: Keep them but make them very subtle (Artsier) */
-    .deco-item { opacity: 0.15; }
-    .item-eye { top: 80%; } /* Move eye to bottom */
+
+/* FOOTER */
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #888;
+    background-color: transparent; /* Slight transparency */
+    z-index: 100;
+}
+
+
+/* DESK CONTAINER */
+.desk-container {
+    /* 1. Limit the width */
+    max-width: 62.5rem;  /* Standard readable width */
+    width: 90%;        /* Fits nicely on smaller screens too */
+    
+    /* 2. Center the block itself */
+    margin: 0 auto;    /* "0" top/bottom, "auto" left/right centers it */
+    
+    /* 3. Center the text inside */
+    text-align: justify; 
+    
+    /* Optional: Add some breathing room */
+    padding: 2.5rem 1.25rem;
+}
+
+
+
+
+
+/* BACK BUTTON*/
+.back-btn-retro {
+    /* Positioning */
+    position: fixed;
+    bottom: 1.875rem;
+    left: 1.875rem;
+    z-index: 50;
+
+    /* Retro Block Styling */
+    display: inline-block;
+    background-color: #000; /* Vintage Cream/Yellow */
+    color: #fff; /* Dark Brown Text */
+    text-decoration: none;
+    
+    /* Typewriter Font */
+    font-family: 'Arial', sans-serif; 
+    font-size: 1.2rem;
+    font-weight: 100;
+    text-transform: lowercase; /* All caps for retro feel */
+    letter-spacing: 0.063rem;
+    
+    padding: 1.25rem 1.25rem;
+    
+    /* The "Hard" Retro Border & Shadow */
+    border: 0.125rem solid #0000;
+   
+    
+    /* Initial Tilt */
+
+    transition: all 0.1s ease; /* Fast transition for mechanical feel */
+}
+
+/* Hover Effect: Wiggles slightly */
+.back-btn-retro:hover {
+    transform: rotate(0deg) translate(-0.125rem, -0.125rem);
+    background-color: #000;
+    cursor: pointer;
+}
+
+/* Active (Click) Effect: Simulates pressing a physical button */
+.back-btn-retro:active {
+    color: #fff;
+    box-shadow: 0rem 0rem 0rem #0000; /* Shadow disappears */
+    transform: translate(0.25rem, 0.25rem) rotate(0deg); /* Moves down to where shadow was */
+}
+
+/* The Dark Background */
+#popup-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Dark see-through */
+    z-index: 999; /* Sit on top of everything */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

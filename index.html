@@ -1,32 +1,38 @@
 <!DOCTYPE html>
-<html lang="sk">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Nevyhorím | Štúdia o vyhorení študentov</title>
-    <meta name="description" content="Študentský projekt o vyhorení na stredných školách. Zisti, čo je vyhorenie, prečítaj si príbehy a nájdi riešenia.">
-    <meta name="keywords" content="vyhorenie, škola, stres, duševné zdravie, študenti, slovensko">
-    <meta name="author" content="Tvoje Meno">
-    
-    <meta property="og:title" content="Nevyhorím - Projekt o duševnom zdraví">
-    <meta property="og:description" content="Necítiš sa vo svojej koži? Pozri sa na môj projekt o vyhorení.">
-    <meta property="og:image" content="/images/papier1.png"> <meta property="og:url" content="https://tvojastranka.sk">
-    <meta property="og:type" content="website">
-
+    <title>Nevyhorím</title>
     <link rel="stylesheet" href="style.css">
-    
-    </head>
+</head>
 <body>
 
     <main class="desk-container">
-        
-        <img src="/images/modreciary.png" class="decoration-item deco-1" alt="" aria-hidden="true">
-        <img src="/images/cerveneciary.png" class="decoration-item deco-2" alt="" aria-hidden="true">
-        <img src="/images/zeleneciary.png" class="decoration-item deco-3" alt="" aria-hidden="true">
-        <img src="/images/zlteciary.png" class="decoration-item deco-4" alt="" aria-hidden="true">
 
-        <div class="top"><h2><a href="/" class="brand-logo">nevyhorím</a></h2></div>
+          <main class="desk-container">
+        <img src="/images/modreciary.png" 
+             class="decoration-item deco-1" 
+             alt="" 
+             aria-hidden="true">
+
+        <img src="/images/cerveneciary.png" 
+             class="decoration-item deco-2" 
+             alt="" 
+             aria-hidden="true">
+
+        <img src="/images/zeleneciary.png" 
+             class="decoration-item deco-3" 
+             alt="" 
+             aria-hidden="true">
+
+        <img src="/images/zlteciary.png" 
+             class="decoration-item deco-4" 
+             alt="" 
+             aria-hidden="true">
+
+        <div class="top"><h2>nevyhorim</h2></div>
+
 
         <div class="title-container">
             <h1>vitaj</h1>
@@ -35,68 +41,73 @@
 
         <a href="vyhorenie.html" class="paper-link pos-1">
             <div class="paper-content">
-                <img src="/images/papier1.png" alt="Článok: Čo je to vyhorenie?">
+                <img src="/images/papier1.png" alt="čo je vyhorenie">
             </div>
         </a>
 
-        <a href="/sara/" class="paper-link pos-2">
+        <a href="/sara.html" class="paper-link pos-2">
             <div class="paper-content">
-                <img src="/images/gulicka.png" alt="O mne - Sára">
+                <img src="/images/gulicka.png" alt="o mne">
             </div>
         </a>
+
 
         <a href="#blog" class="paper-link pos-4">
             <div class="paper-content">
-                <img src="/images/papier3.png" alt="Otestuj sa">
+                <img src="/images/papier3.png" alt="test">
             </div>
         </a>
 
         <a href="#social" class="paper-link pos-5">
             <div class="paper-content">
-                <img src="/images/papier4.png" alt="Ako riešiť vyhorenie">
+                <img src="/images/papier4.png" alt="ako riešiť vyhorenie">
             </div>
         </a>
              
     </main>
 
     <footer>
-        &copy; 2025-2026 Sára Tokárová. Všetky práva vyhradené.
+        &copy; 2023 Creative Studio. All Rights Reserved.
     </footer>
 
-    <!--
+</body>
+</html>
 
-    ono to nič nerobí (nikde sa to neukladá) tak som to len skryl zatial
-
-    <div id="feedback-widget" class="feedback-box">
+<div id="feedback-widget" class="feedback-box">
         <p class="feedback-text">Pomohla ti táto stránka?</p>
         <div class="feedback-buttons">
             <button class="retro-btn" onclick="submitVote('yes')">ÁNO</button>
             <button class="retro-btn" onclick="submitVote('no')">NIE</button>
         </div>
     </div>
-    -->
 
     <script>
         function submitVote(answer) {
             const widget = document.getElementById('feedback-widget');
             
-            // Visual Feedback
+            // 1. Visual Feedback (User sees they clicked)
             widget.innerHTML = '<p class="feedback-text">Ďakujeme za tvoj názor!</p>';
             
-            // Logic
+            // 2. Logic (Here is where you would save to a database)
             console.log("User voted: " + answer);
+            
+            // Example: Saving to LocalStorage (Browser memory) so they don't vote twice immediately
             localStorage.setItem('hasVoted', 'true');
+            localStorage.setItem('voteValue', answer);
 
-            // Hide
+            // 3. Hide the box after 2 seconds
             setTimeout(() => {
                 widget.style.opacity = '0';
+                // Remove from DOM after fade out to prevent clicks
                 setTimeout(() => widget.style.display = 'none', 500);
             }, 2000);
         }
 
+        // Optional: Check if user already voted when page loads
         document.addEventListener("DOMContentLoaded", function() {
             if(localStorage.getItem('hasVoted') === 'true') {
-                 document.getElementById('feedback-widget').style.display = 'none';
+                // If you want to hide it for returning users, uncomment the line below:
+                // document.getElementById('feedback-widget').style.display = 'none';
             }
         });
     </script>

@@ -1,0 +1,476 @@
+/* --- RESET & VARIABLES --- */
+:root {
+    --bg-color: #f3eee8;
+    --text-charcoal: #000000;
+
+    /* FIXED: Switched variables to use drop-shadow filter syntax instead of box-shadow values */
+    /* A slightly darker, tighter shadow looks better for cut paper */
+    --paper-drop-shadow: drop-shadow(0 0.5rem 0.75rem rgba(0,0,0,0.25));
+    --paper-hover-drop-shadow: drop-shadow(0 0.938rem 1.25rem rgba(0,0,0,0.35));
+
+}
+@font-face {
+    font-family: 'CS Quiver Demo';
+    src: url('fonts/CsQuiverRegularDemo-ov0o0.otf') format('opentype');
+    font-style: sans-serif;
+    /* Note: If your CSS file is inside a folder (like css/style.css), 
+       use url('../fonts/PatrickHand-Regular.ttf') instead. */
+}
+
+/* 2. Define Permanent Marker */
+@font-face {
+    font-family: 'Arial';
+    src: url('fonts/ARIAL.TTF') format('truetype');
+    font-style: sans-serif;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    font-family: 'Arial';
+    color: var(--text-charcoal);
+    min-height: 100vh;
+    overflow-x: hidden; /* Prevent horizontal scroll from rotated elements */
+    position: relative;
+}
+
+/* --- TITLE STYLES --- */
+.title-container {
+    text-align: left;
+    z-index: 10; /* Ensures title sits above papers if they overlap */
+    pointer-events: none; /* Allows clicking through text area if needed */
+    margin-bottom: 2rem;
+    padding-top: 2rem;
+}
+
+h1 {
+    font-family: 'CS Quiver Demo', sans-serif;
+    font-size: 3.125rem;
+    letter-spacing: 0.125rem;
+    color: var(--text-charcoal);
+    font-weight: 100;
+    position: absolute;
+    bottom: 1.25rem;
+    right: 34.375rem;
+    
+    
+}
+
+h2 {
+    font-family:'CS Quiver Demo', sans-serif;
+    font-size: 1.563rem;
+    letter-spacing: 0.063rem;
+    color: #1b35b8;
+    font-weight: lighter;
+    
+}
+
+h3 {
+    font-family: 'CS Quiver Demo', sans-serif;
+    font-size: 2.188rem;
+    letter-spacing: 0.125rem;
+    color: #f3eee8;
+    margin-bottom: 1rem;
+    font-weight: lighter;
+}
+
+.top{
+    position:absolute;
+    left:50%;
+    top: 1rem;
+    transform: translateX(-50%);
+
+}
+
+
+
+.title-container p {
+    font-size: 1rem;
+    opacity: 0.6;
+    margin-top: 0.5rem;
+    position: relative;
+    bottom: 1.25rem;
+    right: 39.375rem;
+}
+
+.postava-img {
+    position: absolute;
+    bottom: -2.5rem;
+    left: 26.25rem;  
+    width: 43.75rem; 
+    transform: rotate(10deg);
+    height: auto;
+    z-index: 0;
+}
+
+/* 3. Ensure the image inside fits the new small box */
+.postava-img img {
+    width: 100%;
+    display: block;
+}
+
+/* --- PAPER ELEMENTS (Shared Styles) --- */
+
+.paper-link {
+    display: block;
+    text-decoration: none;
+    /* Transition on the container for movement/rotation */
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    width: fit-content;
+    margin: 0 auto;
+    /* Ensure the shadow doesn't get clipped by the link container */
+    overflow: visible;
+}
+
+.paper-content {
+    /* FIXED: Removed background: white and padding */
+    /* The container is now transparent, just holding the image */
+    display: block;
+    position: relative;
+
+    /* FIXED: Switched from box-shadow to filter: drop-shadow */
+    /* This makes the shadow follow the shape of the PNG image */
+    filter: var(--paper-drop-shadow);
+
+    /* Transition for the shadow change on hover */
+    transition: filter 0.3s ease;
+    /* Important: ensures the drop-shadow isn't clipped */
+    overflow: visible;
+}
+
+.paper-content img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    /* Ensure the image itself doesn't have unintended borders */
+    border: none;
+    outline: none;
+}
+
+/* Hover Effects */
+.paper-link:hover {
+    z-index: 20; /* Bring hovered item to very top */
+    transform: scale(1.05) rotate(0deg) !important; /* Straighten and zoom container */
+}
+
+.paper-link:hover .paper-content {
+    /* FIXED: Apply the stronger drop-shadow filter on hover */
+    filter: var(--paper-hover-drop-shadow);
+}
+
+/* --- MOBILE LAYOUT (Default) --- */
+/* On mobile, we stack them neatly so they are usable */
+.desk-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding-bottom: 5rem; /* Space for footer */
+}
+
+/* Random rotations for mobile organic feel */
+.pos-1 { transform: rotate(-2deg); }
+.pos-2 { transform: rotate(3deg); }
+.pos-3 { transform: rotate(-1deg); }
+.pos-4 { transform: rotate(2deg); }
+.pos-5 { transform: rotate(-3deg); }
+
+/* --- DESKTOP LAYOUT (Min-width: 1024px) --- */
+/* Here we switch to the "Creative Scattered" Absolute layout */
+@media (min-width: 1024px) {
+    body, html {
+        height: 100%;
+        overflow: hidden; /* Lock scroll for full-screen feel */
+    }
+
+    .desk-container {
+        display: block; /* Disable flex */
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    .title-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        font-size: 10rem; /* Larger title on desktop */
+    }
+
+    .paper-link {
+        position: absolute;
+        max-width: 11.25rem; /* Increased slightly for desktop view */
+    }
+
+    /* SCATTER COORDINATES */
+
+    /* Top Left */
+    .pos-1 { /* modre */
+        top: 30%;
+        left: 57%;
+        transform: rotate(-10deg);
+         max-width: 12.5rem;
+    }
+
+    /* Top Right */
+    .pos-2 { /* oko */
+        top: 10%;
+        left: 40%;
+        transform: rotate(10deg);
+        max-width: 9.375rem;
+    }
+
+   
+
+    /* Bottom Right */
+    .pos-4 { /* cervene */
+        bottom: 46%;
+        right: 55%;
+        transform: rotate(-8deg);
+        max-width: 15.625rem;
+    }
+
+    /* Middle Top/Rightish */
+    .pos-5 { /* zlte */
+        top: 10%;
+        right: 35%; /* Overlapping vibe */
+        transform: rotate(-20deg);
+        max-width: 12.5rem;
+    }
+
+    .pos-6 {
+        top: 20%;
+        right: 50%;
+        max-width: 9.375rem;
+    }
+
+}
+
+/* --- FOOTER --- */
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #888;
+    background-color: transparent; /* Slight transparency */
+    z-index: 100;
+}
+
+/* --- Overlay (The dark background) --- */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Semi-transparent dark dim */
+    backdrop-filter: blur(0.188rem); /* Optional: blurs the background slightly */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensures it sits on top of everything */
+}
+
+
+/* --- Bottom Left Retro Back Button --- */
+.back-btn-retro {
+    /* Positioning */
+    position: absolute;
+    bottom: 1.875rem;
+    left: 1.875rem;
+    z-index: 50;
+
+    /* Retro Block Styling */
+    display: inline-block;
+    background-color: #000; /* Vintage Cream/Yellow */
+    color: #fff; /* Dark Brown Text */
+    text-decoration: none;
+    
+    /* Typewriter Font */
+    font-family: 'Arial', sans-serif; 
+    font-size: 1.2rem;
+    font-weight: 100;
+    text-transform: lowercase; /* All caps for retro feel */
+    letter-spacing: 0.125rem;
+
+    padding: 0.625rem 1.25rem; /* Vertical | Horizontal Padding */
+
+    /* The "Hard" Retro Border & Shadow */
+    border: 0.125rem solid #0000;
+   
+    
+    /* Initial Tilt */
+
+    transition: all 0.1s ease; /* Fast transition for mechanical feel */
+}
+
+/* Hover Effect: Wiggles slightly */
+.back-btn-retro:hover {
+    transform: rotate(0deg) translate(-0.063rem, -0.063rem);
+    background-color: #000;
+    cursor: pointer;
+}
+
+/* Active (Click) Effect: Simulates pressing a physical button */
+.back-btn-retro:active {
+    color: #fff;
+    box-shadow: 0rem 0rem 0rem #0000; /* Shadow disappears */
+    transform: translate(0.25rem, 0.25rem) rotate(0deg); /* Moves down to where shadow was */
+}
+
+/* The Dark Background */
+#popup-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Dark see-through */
+    z-index: 999; /* Sit on top of everything */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* The White Box */
+.popup-content {
+    background: white;
+    padding: 2.5rem;
+    width: 90%;
+    max-width: 37.5rem; /* Limits width on big screens */
+    border-radius: 0.625rem;
+    position: relative;
+    box-shadow: 0 0.625rem 1.563rem rgba(0,0,0,0.5);
+}
+
+/* The X Button */
+.close-btn {
+    position: absolute;
+    top: 0.625rem; right: 1.25rem;
+    font-size: 1.875rem;
+    cursor: pointer;
+    font-weight: bold;
+    color: #f3eee8;
+}
+
+/* Utility to hide things */
+.hidden {
+    display: none !important;
+}
+
+/* --- Add this to your CSS file --- */
+
+/* This container will place the image and text in a row */
+.side-by-side-container {
+    display: flex;
+    flex-direction: row; /* Ensures they are side-by-side */
+    align-items: flex-start; /* Aligns text to the top of the image */
+    gap: 1.563rem; /* Adds space between the image and the text */
+    margin-top: 1.25rem; /* Adds some space between the title and content */
+}
+
+/* Controls the size of the image in this layout */
+.side-by-side-container .popup-img {
+    width: 40%; /* The image will take up 40% of the space */
+    height: auto; /* Keeps the image proportions correct */
+    flex-shrink: 0; /* Prevents the image from being squished */
+    border-radius: 0.75rem; /* Optional: Makes the corners rounder */
+    object-fit: cover; /* Ensures the image fills its box nicely */
+}
+
+/* Controls the text block */
+.side-by-side-container .text-content {
+    flex: 1; /* The text will take up all remaining space */
+    font-size: 0.938rem; /* Optional: Makes text slightly larger and easier to read */
+    line-height: 1.6;
+    color: #f3eee8;
+    text-align: justify; /* Optional: Adds space between lines of text */
+}
+
+/* Optional: Removes the default top margin from the paragraph for better alignment */
+.side-by-side-container .text-content p {
+    margin-top: 0;
+}
+
+
+/*STAR 
+/* 1. Remove the default dot */
+.star-list {
+    list-style: none; /* Hides the normal bullet */
+    padding-left: 0;
+}
+
+/* 2. Add the custom Star */
+.star-list li::before {
+    content: "★";      /* This is the star character */
+    color: #f3eee8;    /* Gold color (optional, remove to keep it black) */
+    font-weight: bold;
+    display: inline-block; 
+    width: 1.5em;      /* Space between the star and the text */
+    margin-left: 0.625rem; /* Indentation */
+}
+
+/* Optional: Add spacing between the points */
+.star-list li {
+    margin-bottom: 0.625rem;
+}
+
+.popup-content {
+    background: white;
+    padding: 2.5rem;
+    width: 90%;
+    max-width: 37.5rem;
+    border-radius: 0.625rem;
+    position: relative;
+    box-shadow: 0 0.625rem 1.563rem rgba(0,0,0,0.5);
+
+    /* --- ADD THESE 2 LINES --- */
+    max-height: 80vh;   /* Limit height to 80% of the screen */
+    overflow-y: auto;   /* Add vertical scrollbar if needed */
+}
+
+/* --- CUSTOM SCROLLBAR STYLING --- */
+
+/* 1. FOR CHROME, EDGE & SAFARI */
+
+/* The width of the scrollbar */
+.popup-content::-webkit-scrollbar {
+    width: 0.75rem;
+}
+
+/* The Track (background of the scrollbar) */
+.popup-content::-webkit-scrollbar-track {
+    background: #ff2020; /* red */
+    border-radius: 0.625rem;             /* Rounded corners */
+    margin: 0.625rem 0;                  /* Keeps it away from top/bottom edges */
+}
+
+/* The Thumb (the moving part you drag) */
+.popup-content::-webkit-scrollbar-thumb {
+    background-color: #f3eee8;          /* Grey color */
+    border-radius: 0.625rem;             /* Rounded corners */
+    border: 0.188rem solid transparent;   /* Adds a white border around it for a "floating" look */
+    background-clip: content-box;    /* Ensures the border works */
+}
+
+/* Hover Effect (when mouse is over the scrollbar) */
+.popup-content::-webkit-scrollbar-thumb:hover {
+    background-color: #f3eee8;          /* Darker grey */
+}
+
+/* 2. FOR FIREFOX (Simpler support) */
+.popup-content {
+    scrollbar-width: regular;           /* Makes it skinny */
+    scrollbar-color: #fff transparent; /* Thumb Color | Track Color */
+}
