@@ -22,7 +22,7 @@
     src: url("fonts/Agnes-Regular.otf") format("opentype");
 }
 
- *{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -37,193 +37,67 @@ body {
     position: relative;
 }
 
-/* TEXT */
-.title-container {
-    text-align: center;
-    z-index: 10; /* Ensures title sits above papers if they overlap */
-    pointer-events: none; /* Allows clicking through text area if needed */
-    margin-bottom: 2rem;
-    padding-top: 2rem;
+main {
+    width: 60rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+
+
 /* číslo 1*/
-h5 {
-     font-family: 'Agnes', sans-serif;
-    font-size: 25rem;
-    letter-spacing: 0.063rem;
-    color: #de7d8f;
-    position: absolute;
-    left: 5.625rem;
-    font-weight: lighter;
-}
+
 /* čo je vyhorenie?*/
 h1 {
     font-family: 'CS Quiver Demo', sans-serif;
     font-size: 5.625rem;
     letter-spacing: 0.125rem;
     color: #de7d8f;
-    font-weight: 100;
-    position: absolute;
-    left: 18.75rem;
-    
-}
-/* text1*/
-.content1 { 
-    font-family: 'Arial', sans-serif;
-    font-size: 0.938rem;
-    letter-spacing: 0.063rem;
-    color: #000000;
-    font-weight: normal;
-    margin-top: 1.25rem;
-    margin-right: 16.313rem;
-    text-align: justify;
-    position: absolute;
-    top: 11.25rem;
-    left: 19.375rem;
-    
+    font-weight: 100;  
 }
 
-/* číslo 2*/
-h6 {    
-     font-family: 'Agnes', sans-serif;
-    font-size: 25rem;
-    letter-spacing: 0.063rem;
-    color: #1b35b8;
-    position: absolute;
-    left: 2.5rem;
-    top: 43.75rem;
-    font-weight: lighter;
-}
-
-/* ako vzniká?*/
-h4 {
+h2 {
     font-family: 'CS Quiver Demo', sans-serif;
-    font-size: 5.625rem;
-    letter-spacing: 0.125rem;
-    color: #1b35b8;
-    font-weight: 100;
-    position: absolute;
-    left: 18.75rem;
-    top: 45.625rem;
-    
-}
 
-/* text2*/
-.content2 { 
-    font-family: 'Arial', sans-serif;
-    font-size: 0.938rem;
-    letter-spacing: 0.063rem;
-    color: #000000;
-    font-weight: lighter;
-    margin-top: 1.25rem;
-    margin-right: 16.313rem;
-    text-align: justify;
-    position: absolute;
-    top: 52.5rem;
-    left: 19.375rem;
-    
+    font-size: 3rem;
 }
-
-/* číslo 3*/
-.numbers3 {
-     font-family: 'Agnes', sans-serif;
+.number {    
+    font-family: 'Agnes', sans-serif;
     font-size: 25rem;
-    letter-spacing: 0.063rem;
-    color: #f1d135;
-    position: absolute;
-    left: 4rem;
-    top: 86rem;
-}
-
-/* ako mu predísť?*/
-h3 {
-    font-family: 'CS Quiver Demo', sans-serif;
-    font-size: 5.625rem;
-    letter-spacing: 0.125rem;
-    color: #f1d135;
-    font-weight: 100;
-    position: absolute;
-    left: 18.75rem;        
-    top: 87.5rem;
-}
-
-/* text3*/
-.content3 {    
-    font-family: 'Arial', sans-serif;
-    font-size: 0.938rem;
-    letter-spacing: 0.063rem;
-    color: #000000;
+    color: #1b35b8;
     font-weight: lighter;
-    margin-top: 1.25rem;
-    margin-right: 16.313rem;
-    text-align: justify;
-    position: absolute;
-    top: 90.625rem;
-    left: 19.375rem;
-    
 }
+
+
+
+section {
+    display: grid;
+    grid-template-columns: 16rem 1fr;
+    text-align: start;
+    margin-bottom: 2rem;
+}
+
+p {
+    text-align: justify;
+}
+
+
 
 /* logo*/
-h2 {
+.logo {
      font-family: 'CS Quiver Demo', sans-serif;
     font-size: 1.563rem;
     letter-spacing: 0.063rem;
     color: #1b35b8;
     font-weight: lighter;
-    
-}
 
-
-
-.top{
-    position:absolute;
-    left:50%;
-    top: 1rem;
-    transform: translateX(-50%);
-
-}
-
-
-
-.title-container p {
-    font-size: 1rem;
-    opacity: 0.6;
-    margin-top: 0.5rem;
-}
-
-
-
-/* FOOTER */
-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    padding: 1rem;
+    text-decoration: none;
     text-align: center;
-    font-size: 0.8rem;
-    color: #888;
-    background-color: transparent; /* Slight transparency */
-    z-index: 100;
+    width: 100%;
+    
 }
-
-
-/* DESK CONTAINER */
-.desk-container {
-    /* 1. Limit the width */
-    max-width: 62.5rem;  /* Standard readable width */
-    width: 90%;        /* Fits nicely on smaller screens too */
-    
-    /* 2. Center the block itself */
-    margin: 0 auto;    /* "0" top/bottom, "auto" left/right centers it */
-    
-    /* 3. Center the text inside */
-    text-align: justify; 
-    
-    /* Optional: Add some breathing room */
-    padding: 2.5rem 1.25rem;
-}
-
-
 
 
 

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dotazník Školského Vyhorenia</title>
+    <link rel="stylesheet" href="test.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Dotazník Školského Vyhorenia</h1>
+    
+    <div class="progress-container">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <div class="step-indicator">
+            <span id="step-text">Krok 1 z 4</span>
+        </div>
+    </div>
+
+    <form id="burnoutForm">
+        <div class="step active" id="step1">
+            <h2>A) Emočné vyčerpanie</h2>
+            <div id="questions-a"></div>
+        </div>
+
+        <div class="step" id="step2">
+            <h2>B) Apatia</h2>
+            <div id="questions-b"></div>
+        </div>
+
+        <div class="step" id="step3">
+            <h2>C) Akademická neefektivita</h2>
+            <div id="questions-c"></div>
+        </div>
+
+        <div class="step" id="step4">
+            <h2>Výsledky</h2>
+            <div id="results-content">
+                </div>
+            <div class="interpretation" id="interpretation-text"></div>
+            <div style="text-align: center; margin-top: 30px;">
+                <button type="button" class="btn-next" onclick="location.reload()">Spustiť znova</button>
+            </div>
+        </div>
+
+        <div class="controls" id="controls">
+            <button type="button" class="btn-prev" id="prevBtn" onclick="changeStep(-1)" style="display: none;">Späť</button>
+            <div class="error-msg" id="errorMsg">Prosím, odpovedzte na všetky otázky.</div>
+            <button type="button" class="btn-next" id="nextBtn" onclick="changeStep(1)">Ďalej</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    // --- DATA CONFIGURATION ---
+    const scaleOptions = [
+        { val: 0, text: "Nikdy" },
+        { val: 1, text: "Málokedy" },
+        { val: 2, text: "Často" },
+        { val: 3, text: "Vždy" }
+    ];
+
+    const questionsData = {
+        A: [
+            "Je na vás tvorený tlak od pedagógov?",
+            "Máte pocit, že máte príliš veľa školských povinností?",
+            "Ovplyvňujú známky váš mentálny stav?",
+            "Cítite sa zo štúdia mentálne vyčerpaní?",
+            "Zasahuje štúdium do vášho voľného času?",
+            "Je na vás tvorený tlak vašimi najbližšími?",
+            "Zažívate úzkosť?",
+            "Zažívate depresívne stavy?",
+            "Máte problémy so spánkom?",
+            "Zažívate bolesti hlavy/migrény?",
+            "Zažívate zdravotné problémy?"
+        ],
+        B: [
+            { text: "Dávajú vám pedagógovia motiváciu do štúdia?", reverse: true },
+            { text: "Máte problém nájsť motiváciu na učenie/chodenie do školy?", reverse: false },
+            { text: "Dodávajú vám pedagógovia podporu?", reverse: true },
+            { text: "Zapájate sa do školských aktivít? (súťaže, krúžky, atď.)", reverse: true },
+            { text: "Máte pocit, že štúdium potláča vašu kreatívnu stránku?", reverse: false }
+        ],
+        C: [
+            "Znižuje štúdium vaše sebavedomie?",
+            "Máte zo štúdia pocit menejcennosti?",
+            "Máte zo štúdia pocit, že nie ste dosť dobrí?",
+            "Máte problém s prokrastináciou?",
+            "Máte problém so sústredením?",
+            "Máte tendenciu sa porovnávať s ostatnými ľuďmi?"
+        ]
+    };
+
+    let currentStep = 1;
+    const totalSteps = 4;
+
+    // --- INITIALIZATION ---
+    function renderQuestions() {
+        renderSection('A', 'questions-a');
+        renderSection('B', 'questions-b');
+        renderSection('C', 'questions-c');
+    }
+
+    function renderSection(sectionKey, containerId) {
+        const container = document.getElementById(containerId);
+        questionsData[sectionKey].forEach((q, index) => {
+            const questionText = typeof q === 'string' ? q : q.text;
+            const isReverse = typeof q === 'object' && q.reverse;
+            // Unique name for radio group: section-index (e.g., A-0, B-3)
+            const inputName = `${sectionKey}-${index}`;
+            const reverseAttr = isReverse ? 'data-reverse="true"' : '';
+
+            let html = `
+                <div class="question-block" ${reverseAttr} data-section="${sectionKey}">
+                    <label class="question-text">${index + 1}. ${questionText}</label>
+                    <div class="options">
+            `;
+
+            scaleOptions.forEach(opt => {
+                html += `
+                    <label class="option-label">
+                        <input type="radio" name="${inputName}" value="${opt.val}" required>
+                        <span>${opt.text}</span>
+                    </label>
+                `;
+            });
+
+            html += `
+                    </div>
+                </div>
+            `;
+            container.innerHTML += html;
+        });
+    }
+
+    // --- NAVIGATION LOGIC ---
+    function changeStep(n) {
+        const errorMsg = document.getElementById('errorMsg');
+        
+        // Validation when moving forward
+        if (n === 1 && !validateCurrentStep()) {
+            errorMsg.style.display = 'block';
+            return;
+        }
+        errorMsg.style.display = 'none';
+
+        // Hide current step
+        document.getElementById(`step${currentStep}`).classList.remove('active');
+        
+        currentStep += n;
+
+        // Show new step
+        document.getElementById(`step${currentStep}`).classList.add('active');
+
+        // Update UI logic
+        updateUI();
+
+        // If reached results page
+        if (currentStep === 4) {
+            calculateResults();
+        }
+    }
+
+    function validateCurrentStep() {
+        const currentStepDiv = document.getElementById(`step${currentStep}`);
+        const radioGroups = new Set();
+        
+        // Find all radio buttons in current step
+        const radios = currentStepDiv.querySelectorAll('input[type="radio"]');
+        radios.forEach(r => radioGroups.add(r.name));
+
+        // Check if each group has a checked value
+        for (let groupName of radioGroups) {
+            const checked = currentStepDiv.querySelector(`input[name="${groupName}"]:checked`);
+            if (!checked) return false;
+        }
+        return true;
+    }
+
+    function updateUI() {
+        // Progress Bar
+        const percentage = ((currentStep - 1) / (totalSteps - 1)) * 100;
+        document.getElementById('progress-fill').style.width = `${percentage}%`;
+        document.getElementById('step-text').innerText = `Krok ${currentStep} z ${totalSteps}`;
+
+        // Buttons
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const controls = document.getElementById('controls');
+
+        if (currentStep === 1) {
+            prevBtn.style.display = 'none';
+        } else {
+            prevBtn.style.display = 'block';
+        }
+
+        if (currentStep === 4) {
+            controls.style.display = 'none'; // Hide nav buttons on result page
+        } else {
+            controls.style.display = 'flex';
+            nextBtn.innerHTML = currentStep === 3 ? "Vyhodnotiť" : "Ďalej";
+        }
+        
+        window.scrollTo(0, 0);
+    }
+
+    // --- CALCULATION LOGIC ---
+    function calculateResults() {
+        const form = document.getElementById('burnoutForm');
+        const formData = new FormData(form);
+        
+        let scores = { A: 0, B: 0, C: 0 };
+        let counts = { A: 0, B: 0, C: 0 }; // Just for verification
+
+        // Iterate over all question blocks
+        document.querySelectorAll('.question-block').forEach(block => {
+            const section = block.getAttribute('data-section');
+            const isReverse = block.getAttribute('data-reverse') === 'true';
+            
+            // Find the selected input in this block
+            const selected = block.querySelector('input[type="radio"]:checked');
+            if (selected) {
+                let val = parseInt(selected.value);
+                
+                // INVERSE LOGIC: 3 - value
+                if (isReverse) {
+                    val = 3 - val;
+                }
+
+                scores[section] += val;
+                counts[section]++;
+            }
+        });
+
+        const totalScore = scores.A + scores.B + scores.C;
+
+        // Render Results
+        const resultHtml = `
+            <div class="result-card">
+                <div class="score-row">
+                    <span>Emočné vyčerpanie (A):</span>
+                    <span class="score-value">${scores.A}</span>
+                </div>
+                <div class="score-row">
+                    <span>Apatia (B):</span>
+                    <span class="score-value">${scores.B}</span>
+                </div>
+                <div class="score-row">
+                    <span>Akademická neefektivita (C):</span>
+                    <span class="score-value">${scores.C}</span>
+                </div>
+                <div class="score-row total-score">
+                    <span>Celkové skóre:</span>
+                    <span class="score-value">${totalScore}</span>
+                </div>
+            </div>
+        `;
+
+        document.getElementById('results-content').innerHTML = resultHtml;
+
+        // Simple Interpretation Logic
+        const interpretationDiv = document.getElementById('interpretation-text');
+        let text = "";
+        let color = "";
+        
+        // Note: These thresholds are arbitrary examples. You can adjust them.
+        // Max score is approx 66 (22 questions * 3)
+        if (totalScore < 20) {
+            text = "Vaše výsledky naznačujú nízku mieru vyhorenia. Zdá sa, že zvládate školské povinnosti a stres dobre.";
+            color = "#2ecc71"; // Green
+            interpretationDiv.style.borderLeftColor = color;
+            interpretationDiv.style.backgroundColor = "#e8f6f3";
+            interpretationDiv.style.color = "#0e6251";
+        } else if (totalScore < 40) {
+            text = "Vaše výsledky naznačujú miernu úroveň stresu a počínajúce vyhorenie. Je dôležité dbať na psychohygienu a oddych.";
+            color = "#f1c40f"; // Yellow/Orange
+            interpretationDiv.style.borderLeftColor = color;
+            interpretationDiv.style.backgroundColor = "#fef9e7";
+            interpretationDiv.style.color = "#7d6608";
+        } else {
+            text = "Vaše výsledky naznačujú vysokú mieru vyhorenia. Cítite výrazný tlak a vyčerpanie. Odporúčame vyhľadať podporu (školský psychológ, rozhovor s rodičmi) a zamerať sa na svoje duševné zdravie.";
+            color = "#e74c3c"; // Red
+            interpretationDiv.style.borderLeftColor = color;
+            interpretationDiv.style.backgroundColor = "#fdedec";
+            interpretationDiv.style.color = "#7b241c";
+        }
+        
+        interpretationDiv.innerText = text;
+    }
+
+    // Run on load
+    renderQuestions();
+</script>
+
+</body>
+</html>
