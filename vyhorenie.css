@@ -90,10 +90,8 @@ p {
     letter-spacing: 0.063rem;
     color: #1b35b8;
     font-weight: lighter;
-
-    text-decoration: none;
     text-align: center;
-    width: 100%;
+    text-decoration: none;
     
 }
 
@@ -155,4 +153,16 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #888;
+    background-color: transparent; /* Slight transparency */
+    z-index: 100;
 }
