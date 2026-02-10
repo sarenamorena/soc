@@ -70,7 +70,7 @@ h2 {
 
 section {
     display: grid;
-    grid-template-columns: 15rem 1fr;
+    grid-template-columns: 15rem 60rem;
     text-align: start;
     margin-bottom: 2rem;
     margin-top: 2.5rem;
