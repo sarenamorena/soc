@@ -443,7 +443,7 @@ footer {
     /* Bottom Right - Paper 4 */
     .pos-5 {
         top: auto;
-        bottom: 10%;
+        bottom: 30%;
         left: auto;
         right: 5%;
         transform: rotate(-8deg);
