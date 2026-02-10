@@ -166,3 +166,92 @@ footer {
     background-color: transparent; /* Slight transparency */
     z-index: 100;
 }
+
+/* --- MOBILE VIEW (Tablets & Phones) --- */
+@media screen and (max-width: 768px) {
+
+    /* 1. CONTAINER */
+    main {
+        width: 100%;
+        display: block;
+        
+        /* Side Padding */
+        padding-left: 2rem; 
+        padding-right: 2rem;
+        
+        /* Top Padding: Just enough to clear the header row */
+        padding-top: 5rem; 
+        margin-top: 0;
+        position: relative; /* Needed for the absolute positioning inside */
+    }
+
+    /* 2. THE HEADER ROW (Button & Logo) */
+
+    /* A) Back Button (Top Left) */
+    .back-btn-retro {
+        position: absolute;
+        top: 1.5rem;      /* Pinned to top */
+        left: 1.5rem;     /* Pinned to left */
+        
+        /* Reset desktop styles */
+        bottom: auto;
+        transform: none; 
+        
+        /* Mobile Look */
+        background-color: #000 !important;
+        color: #fff !important;
+        border: none;
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem; /* Slightly smaller */
+        z-index: 100;      /* Ensure it's on top */
+    }
+
+    /* B) Logo (Top Right - Next to button on the other side) */
+    .logo {
+
+        position: absolute;
+        top: 1.5rem;       /* Aligned with button */
+        right: 1.5rem;     /* Pinned to right */
+        
+        /* Reset margins/alignment */
+        width: auto;
+        margin: 0;
+        text-align: center; 
+        left: auto;
+        
+        /* Smaller Size */
+        font-size: 1.5rem; 
+        line-height: 1;    /* Fix vertical alignment */
+        z-index: 100;
+        text-align: center;
+
+    }
+
+    /* 3. CONTENT STYLING */
+    .number {
+        display: none;
+    }
+
+    section {
+        display: block;
+        margin-bottom: 3rem;
+    }
+
+    .content {
+        width: 100%;
+        text-align: left;
+    }
+
+    h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        line-height: 1.1;
+    }
+
+    p {
+        text-align: justify;
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-bottom: 1.5rem;
+    }
+}
