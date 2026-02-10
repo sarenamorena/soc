@@ -73,7 +73,7 @@ h1 {
 }
 
 h2 {
-    font-family: 'CS Quiver Demo';
+    font-family: 'Arial', sans-serif;
     font-size: 1.4em;
     margin-bottom: 20px;
     color: var(--primary);
