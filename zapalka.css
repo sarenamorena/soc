@@ -110,3 +110,115 @@ body {
     background-color: #333;
     cursor: pointer;
 }
+
+/* --- MOBILE VIEW (Tablets & Phones) --- */
+@media screen and (max-width: 768px) {
+
+    /* 1. ENABLE SCROLLING */
+    body {
+        overflow-y: auto;   /* Scrollable */
+        height: auto;       /* Grow with content */
+    }
+
+    .split-section {
+        display: block;     /* Stack vertically */
+        width: 100%;
+        height: auto;
+        
+        /* Padding: Top clears header, Bottom 0 for image flush */
+        padding: 5rem 2rem 0 2rem; 
+        margin: 0;
+    }
+
+    /* 2. HEADER ALIGNMENT (Button Left / Logo Right) */
+    
+    /* Back Button */
+    .back-btn-retro {
+        position: absolute;
+        top: 1.5rem;          /* Pinned Top */
+        left: 1.5rem;         /* Pinned Left */
+        bottom: auto;       /* Reset desktop styles */
+        
+        /* Mobile Style */
+        background-color: #000 !important;
+        color: #fff !important;
+        border: none;
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+        z-index: 100;
+    }
+
+    /* Logo */
+    .top {
+        position: absolute;
+        top: 1.5rem;          /* Matches Button Top */
+        right: 1.5rem;        /* Pinned Right */
+        width: auto;
+        margin: 0;
+        text-align: right;
+        z-index: 100;
+    }
+
+    .top h2 {
+        font-size: 1.5rem;  /* Balanced with button size */
+        margin: 0;
+        line-height: 1;     /* Fixes vertical alignment */
+    }
+
+    /* 3. TEXT & TITLE STYLING */
+    .text-column {
+        width: 100%;
+        padding: 0;
+    }
+
+    .section-title {
+        text-align: left;
+        font-size: 3.5rem;
+        white-space: normal;
+        line-height: 1;
+
+        /* EQUAL SPACE TOP & BOTTOM */
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .text-column p {
+        text-align: justify;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+    }
+
+    /* 4. BIG MATCH IMAGE (Coming from bottom) */
+    .image-column {
+        width: 110%;
+        display: block;
+        
+        /* Negative margin pulls it down if needed, or remove padding */
+        margin-top: 2rem; 
+        padding: 0;
+    }
+
+    .image-column img {
+        width: 100%;         /* Full width */
+        max-width: none;     /* No size limit */
+        height: auto;
+        display: block;      /* Removes bottom gap */
+        
+        /* Optional: Scales it up slightly to look imposing */
+        transform: scale(1.1); 
+        transform-origin: bottom center;
+    }
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #888;
+    background-color: transparent; /* Slight transparency */
+    z-index: 100;
+}
+}
