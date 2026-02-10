@@ -370,3 +370,82 @@ footer {
 }
 
 
+/* --- MOBILE VIEW (Tablets & Phones) --- */
+@media screen and (max-width: 768px) {
+
+    /* 1. RESET THE CONTAINER */
+    .desk-container {
+        /* On mobile, we might need scrolling if items are spread out */
+        height: 100vh; 
+        overflow: hidden; /* Or 'auto' if you want to scroll */
+        position: relative;
+    }
+
+    /* 2. ADJUST THE TITLE ("Vitaj") */
+    .title-container {
+        /* Center it */
+        position: absolute;
+        top: 40%;  /* Moved lower (was likely higher) */
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-5deg);
+        width: 100%;
+        z-index: 20; /* Ensure it's on top */
+    }
+
+    .title-container h1 {
+        font-size: 8rem; /* BIGGER (adjust as needed) */
+        line-height: 0.8;
+    }
+
+    .title-container p {
+        font-size: 1.5rem; /* readable size */
+        margin-top: 1rem;
+    }
+
+    /* 3. LOGO ("nevyhorim") */
+    .top h2 {
+        font-size: 2rem;
+        left: 1rem;
+        top: 1rem;
+    }
+
+    /* 4. SCATTER THE PAPERS (Mobile Specific Positions) */
+    /* We override the desktop 'top/left' values here */
+
+    .paper-link {
+        width: 140px; /* Smaller size for mobile */
+        position: absolute;
+    }
+
+    /* Top Left - Paper 1 */
+    .pos-1 {
+        top: 10%;
+        left: 5%;
+        transform: rotate(-10deg);
+    }
+
+    /* Top Right - Paper 2 */
+    .pos-2 {
+        top: 12%;
+        left: auto;
+        right: 5%; /* Pin to right side */
+        transform: rotate(5deg);
+    }
+
+    /* Bottom Left - Paper 3 */
+    .pos-4 {
+        top: auto;
+        bottom: 15%;
+        left: 5%;
+        transform: rotate(15deg);
+    }
+
+    /* Bottom Right - Paper 4 */
+    .pos-5 {
+        top: auto;
+        bottom: 10%;
+        left: auto;
+        right: 5%;
+        transform: rotate(-8deg);
+    }
+}
