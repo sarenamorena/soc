@@ -57,6 +57,7 @@ body {
     white-space: nowrap;
     margin: 0 0 2rem 0;  /* Spacing below title */
     line-height: 1;
+    font-weight: normal;
 }
 
 
